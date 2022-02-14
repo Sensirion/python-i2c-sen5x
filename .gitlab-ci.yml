@@ -1,0 +1,66 @@
+include: https://gitlab.sensirion.lokal/Sensirion/Python/ci-config-python/raw/master/gitlab-ci-template-v2.yml
+
+variables:
+  PYTEST_ADDOPTS: '-m "not needs_device"'
+
+check_rst_syntax:
+  extends: .check_rst_syntax_v2
+
+check_editorconfig:
+  extends: .check_editorconfig_v2
+
+py3p8_linux_sdist:
+  extends: .py3p8_linux_sdist_v2
+
+
+py3p6_linux_build:
+  extends: .py3p6_linux_build_v2
+
+py3p8_linux_build:
+  extends: .py3p8_linux_build_v2
+
+
+py3p5_64bit_win_build:
+  extends: .py3p5_64bit_win_docker_build_v2
+
+py3p8_64bit_win_build:
+  extends: .py3p8_64bit_win_docker_build_v2
+
+
+build_docs:
+  extends: .build_docs_v2
+  script:
+    - python setup.py install
+    - pip install -r docs/requirements.txt
+    - ./ci/set_git_config.sh
+    - sphinx-versioning build -r "$CI_COMMIT_REF_NAME" -w "$CI_COMMIT_REF_NAME" docs docs/_build/html
+
+
+deploy_staging:
+  extends: .deploy_staging_v2
+
+deploy_stable:
+  extends: .deploy_stable_v2
+  environment:
+    name: pypi.org
+    url: https://pypi.org/project/sensirion-i2c-sen5x/
+  before_script:
+    - pip install twine~=1.12.1
+  script:
+    - PKG_VERSION=$(python setup.py --version --quiet | tail -n1)
+    - TAG_VERSION=$(git describe --tags)
+    - if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then echo "Tag Version ($TAG_VERSION) != Package Version ($PKG_VERSION)" && exit 1; fi
+    - twine upload dist/*
+
+
+deploy_docs:
+  stage: deploy
+  tags: [linux, docker]
+  image: registry.gitlab.sensirion.lokal/sensirion/docker/docker-python:3.6-18.04-2.7.0
+  dependencies: []
+  only: [master, tags]
+  script:
+    - python setup.py install
+    - pip install -r docs/requirements.txt
+    - ./ci/set_git_config.sh
+    - sphinx-versioning push docs gh-pages .
