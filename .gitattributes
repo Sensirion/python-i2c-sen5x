@@ -1,2 +1,3 @@
-# Disable automatic end-of-line conversion for all files.
+# Disable automatic end-of-line conversion for all files (same as "core.autocrlf=false").
 * -text
+CHANGELOG.rst merge=union
