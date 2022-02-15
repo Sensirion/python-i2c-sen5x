@@ -1,0 +1,497 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sensirion_i2c_sen5x.response_types &mdash; sensirion-i2c-sen5x 0.1.0 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> sensirion-i2c-sen5x
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">sensirion-i2c-sen5x</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>sensirion_i2c_sen5x.response_types</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for sensirion_i2c_sen5x.response_types</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># (c) Copyright 2022 Sensirion AG, Switzerland</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Sen5xMassConcentration"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.response_types.Sen5xMassConcentration">[docs]</a><span class="k">class</span> <span class="nc">Sen5xMassConcentration</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents a SEN5x measurement response for the particulate matter mass</span>
+<span class="sd">    concentration.</span>
+
+<span class="sd">    With the :py:attr:`ticks` attribute you can access the raw data as received</span>
+<span class="sd">    from the device. For the converted physical value the :py:attr:`physical`</span>
+<span class="sd">    attribute is available. The attribute :py:attr:`available` can be used to</span>
+<span class="sd">    check whether the value is available or not.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Sen5xMassConcentration.__init__"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.response_types.Sen5xMassConcentration.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ticks</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates an instance from the received raw data.</span>
+
+<span class="sd">        :param int ticks:</span>
+<span class="sd">            The read ticks as received from the device.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xMassConcentration</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1">#: The ticks (int) as received from the device.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ticks</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ticks</span><span class="p">)</span>
+
+        <span class="c1">#: Flag (bool) whether the received value is available or not.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">available</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ticks</span> <span class="o">!=</span> <span class="mh">0xFFFF</span>
+
+        <span class="c1">#: The converted physical value (float) in µg/m³. This is NaN if the</span>
+        <span class="c1">#: value is not available.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">physical</span> <span class="o">=</span> <span class="p">(</span><span class="n">ticks</span> <span class="o">/</span> <span class="mf">10.0</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">available</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;nan&#39;</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{:0.1f}</span><span class="s1"> µg/m^3&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">physical</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">available</span> \
+            <span class="k">else</span> <span class="s1">&#39;N/A&#39;</span></div>
+
+
+<div class="viewcode-block" id="Sen5xHumidity"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.response_types.Sen5xHumidity">[docs]</a><span class="k">class</span> <span class="nc">Sen5xHumidity</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents a SEN5x measurement response for the humidity.</span>
+
+<span class="sd">    With the :py:attr:`ticks` attribute you can access the raw data as received</span>
+<span class="sd">    from the device. For the converted value the :py:attr:`percent_rh`</span>
+<span class="sd">    attribute is available. The attribute :py:attr:`available` can be used to</span>
+<span class="sd">    check whether the value is available or not.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Sen5xHumidity.__init__"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.response_types.Sen5xHumidity.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ticks</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates an instance from the received raw data.</span>
+
+<span class="sd">        :param int ticks:</span>
+<span class="sd">            The read ticks as received from the device.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xHumidity</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1">#: The ticks (int) as received from the device.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ticks</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ticks</span><span class="p">)</span>
+
+        <span class="c1">#: Flag (bool) whether the received value is available or not.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">available</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ticks</span> <span class="o">!=</span> <span class="mh">0x7FFF</span>
+
+        <span class="c1">#: The converted humidity (float) in %RH. This is NaN if the</span>
+        <span class="c1">#: value is not available.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">percent_rh</span> <span class="o">=</span> <span class="p">(</span><span class="n">ticks</span> <span class="o">/</span> <span class="mf">100.0</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">available</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;nan&#39;</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{:0.2f}</span><span class="s1"> %RH&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">percent_rh</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">available</span> \
+            <span class="k">else</span> <span class="s1">&#39;N/A&#39;</span></div>
+
+
+<div class="viewcode-block" id="Sen5xTemperature"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.response_types.Sen5xTemperature">[docs]</a><span class="k">class</span> <span class="nc">Sen5xTemperature</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents a SEN5x measurement response for the temperature.</span>
+
+<span class="sd">    With the :py:attr:`ticks` attribute you can access the raw data as received</span>
+<span class="sd">    from the device. For the converted values you can choose between</span>
+<span class="sd">    :py:attr:`degrees_celsius` and :py:attr:`degrees_fahrenheit`. The</span>
+<span class="sd">    attribute :py:attr:`available` can be used to check whether the value is</span>
+<span class="sd">    available or not.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Sen5xTemperature.__init__"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.response_types.Sen5xTemperature.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ticks</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates an instance from the received raw data.</span>
+
+<span class="sd">        :param int ticks:</span>
+<span class="sd">            The read ticks as received from the device.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xTemperature</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1">#: The ticks (int) as received from the device.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ticks</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ticks</span><span class="p">)</span>
+
+        <span class="c1">#: Flag (bool) whether the received value is available or not.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">available</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ticks</span> <span class="o">!=</span> <span class="mh">0x7FFF</span>
+
+        <span class="c1">#: The converted temperature (float) in °C. This is NaN if the</span>
+        <span class="c1">#: value is not available.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">degrees_celsius</span> <span class="o">=</span> <span class="p">(</span><span class="n">ticks</span> <span class="o">/</span> <span class="mf">200.0</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">available</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;nan&#39;</span><span class="p">)</span>
+
+        <span class="c1">#: The converted temperature (float) in °F. This is NaN if the</span>
+        <span class="c1">#: value is not available.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">degrees_fahrenheit</span> <span class="o">=</span> <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">degrees_celsius</span> <span class="o">*</span> <span class="mf">9.0</span> <span class="o">/</span> <span class="mf">5.0</span><span class="p">)</span> <span class="o">+</span> <span class="mf">32.0</span><span class="p">)</span> \
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">available</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;nan&#39;</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{:0.2f}</span><span class="s1"> °C&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">degrees_celsius</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">available</span> \
+            <span class="k">else</span> <span class="s1">&#39;N/A&#39;</span></div>
+
+
+<div class="viewcode-block" id="Sen5xAirQualityIndex"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.response_types.Sen5xAirQualityIndex">[docs]</a><span class="k">class</span> <span class="nc">Sen5xAirQualityIndex</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents a SEN5x measurement response for the air quality index.</span>
+
+<span class="sd">    With the :py:attr:`ticks` attribute you can access the raw data as received</span>
+<span class="sd">    from the device. For the converted value the :py:attr:`scaled` attribute is</span>
+<span class="sd">    available. The attribute :py:attr:`available` can be used to check whether</span>
+<span class="sd">    the value is available or not.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Sen5xAirQualityIndex.__init__"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.response_types.Sen5xAirQualityIndex.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ticks</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates an instance from the received raw data.</span>
+
+<span class="sd">        :param int ticks:</span>
+<span class="sd">            The read ticks as received from the device.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xAirQualityIndex</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1">#: The ticks (int) as received from the device.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ticks</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ticks</span><span class="p">)</span>
+
+        <span class="c1">#: Flag (bool) whether the received value is available or not.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">available</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ticks</span> <span class="o">!=</span> <span class="mh">0x7FFF</span>
+
+        <span class="c1">#: The converted/scaled index (float). This is NaN if the</span>
+        <span class="c1">#: value is not available.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scaled</span> <span class="o">=</span> <span class="p">(</span><span class="n">ticks</span> <span class="o">/</span> <span class="mf">10.0</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">available</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;nan&#39;</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{:.1f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scaled</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">available</span> <span class="k">else</span> <span class="s1">&#39;N/A&#39;</span></div>
+
+
+<div class="viewcode-block" id="Sen5xDeviceStatus"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.response_types.Sen5xDeviceStatus">[docs]</a><span class="k">class</span> <span class="nc">Sen5xDeviceStatus</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents a SEN5x device status response.</span>
+
+<span class="sd">    With the :py:attr:`value` attribute you can access the raw value as</span>
+<span class="sd">    received from the device. The convenience attribute :py:attr:`flags`</span>
+<span class="sd">    allows you to get all set flags as strings. In addition, each flag is</span>
+<span class="sd">    provided as separate bool attribute.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Sen5xDeviceStatus.__init__"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.response_types.Sen5xDeviceStatus.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Creates an instance from the received raw data.</span>
+
+<span class="sd">        :param int value:</span>
+<span class="sd">            The raw device status value as received from the device.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xDeviceStatus</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="c1">#: The value (int) as received from the device.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+
+        <span class="c1">#: All currently set flags as a list of flag names, i.e. list(str)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">flags</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1">#: Flag (bool) whether a fan error occurred.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fan_error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;fan_error&#39;</span><span class="p">)</span>
+
+        <span class="c1">#: Flag (bool) whether a laser error occurred.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">laser_error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;laser_error&#39;</span><span class="p">)</span>
+
+        <span class="c1">#: Flag (bool) whether an SHT error occurred.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sht_error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="s1">&#39;sht_error&#39;</span><span class="p">)</span>
+
+        <span class="c1">#: Flag (bool) whether an SGP error occurred.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sgp_error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;sgp_error&#39;</span><span class="p">)</span>
+
+        <span class="c1">#: Flag (bool) whether the fan cleaning is currently active.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fan_cleaning</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="s1">&#39;fan_cleaning&#39;</span><span class="p">)</span>
+
+        <span class="c1">#: Flag (bool) whether the fan speed is currently out of specs.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fan_speed_out_of_specs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="s1">&#39;fan_speed_out_of_specs&#39;</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="n">is_set</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">index</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">is_set</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">is_set</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;0x</span><span class="si">{:08X}</span><span class="s2"> [</span><span class="si">{}</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">flags</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">flags</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;OK&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Sen5xFirmwareVersion"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.response_types.Sen5xFirmwareVersion">[docs]</a><span class="k">class</span> <span class="nc">Sen5xFirmwareVersion</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class representing the firmware version of a device.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xFirmwareVersion.__init__"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.response_types.Sen5xFirmwareVersion.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">major</span><span class="p">,</span> <span class="n">minor</span><span class="p">,</span> <span class="n">debug</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+
+<span class="sd">        :param byte major: Major version.</span>
+<span class="sd">        :param byte minor: Minor version.</span>
+<span class="sd">        :param bool debug: Debug flag (False for official releases).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xFirmwareVersion</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">major</span> <span class="o">=</span> <span class="n">major</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">minor</span> <span class="o">=</span> <span class="n">minor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="o">=</span> <span class="n">debug</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.</span><span class="si">{}{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">major</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minor</span><span class="p">,</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">debug</span> <span class="ow">and</span> <span class="s1">&#39;-debug&#39;</span> <span class="ow">or</span> <span class="s1">&#39;&#39;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Sen5xHardwareVersion"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.response_types.Sen5xHardwareVersion">[docs]</a><span class="k">class</span> <span class="nc">Sen5xHardwareVersion</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class representing the hardware version of a device.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xHardwareVersion.__init__"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.response_types.Sen5xHardwareVersion.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">major</span><span class="p">,</span> <span class="n">minor</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+
+<span class="sd">        :param byte major: Major version.</span>
+<span class="sd">        :param byte minor: Minor version.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xHardwareVersion</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">major</span> <span class="o">=</span> <span class="n">major</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">minor</span> <span class="o">=</span> <span class="n">minor</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">major</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minor</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Sen5xProtocolVersion"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.response_types.Sen5xProtocolVersion">[docs]</a><span class="k">class</span> <span class="nc">Sen5xProtocolVersion</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class representing the I2C protocol version of an I2C device.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xProtocolVersion.__init__"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.response_types.Sen5xProtocolVersion.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">major</span><span class="p">,</span> <span class="n">minor</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+
+<span class="sd">        :param byte major: Major version.</span>
+<span class="sd">        :param byte minor: Minor version.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xProtocolVersion</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">major</span> <span class="o">=</span> <span class="n">major</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">minor</span> <span class="o">=</span> <span class="n">minor</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{}</span><span class="s1">.</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">major</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">minor</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Sen5xVersion"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.response_types.Sen5xVersion">[docs]</a><span class="k">class</span> <span class="nc">Sen5xVersion</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class representing all version numbers of an I2C device. This is used for</span>
+<span class="sd">    the &quot;Get Version&quot; command.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xVersion.__init__"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.response_types.Sen5xVersion.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">firmware</span><span class="p">,</span> <span class="n">hardware</span><span class="p">,</span> <span class="n">protocol</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+
+<span class="sd">        :param ~sensirion_i2c_sen5x.response_types.Sen5xFirmwareVersion firmware:</span>
+<span class="sd">            Firmware version.</span>
+<span class="sd">        :param ~sensirion_i2c_sen5x.response_types.Sen5xHardwareVersion hardware:</span>
+<span class="sd">            Hardware version.</span>
+<span class="sd">        :param ~sensirion_i2c_sen5x.response_types.Sen5xProtocolVersion protocol:</span>
+<span class="sd">            SHDLC protocol version.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xVersion</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span> <span class="o">=</span> <span class="n">firmware</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hardware</span> <span class="o">=</span> <span class="n">hardware</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">protocol</span> <span class="o">=</span> <span class="n">protocol</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;Firmware </span><span class="si">{}</span><span class="s1">, Hardware </span><span class="si">{}</span><span class="s1">, Protocol </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">firmware</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">hardware</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">protocol</span>
+        <span class="p">)</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022 Sensirion AG, Switzerland
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="response_types.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
