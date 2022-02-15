@@ -1,0 +1,1470 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sensirion_i2c_sen5x.commands.generated &mdash; sensirion-i2c-sen5x 0.1.1 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> sensirion-i2c-sen5x
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">sensirion-i2c-sen5x</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>sensirion_i2c_sen5x.commands.generated</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for sensirion_i2c_sen5x.commands.generated</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># (c) Copyright 2022 Sensirion AG, Switzerland</span>
+
+<span class="c1">##############################################################################</span>
+<span class="c1">##############################################################################</span>
+<span class="c1">#                 _____         _    _ _______ _____ ____  _   _</span>
+<span class="c1">#                / ____|   /\  | |  | |__   __|_   _/ __ \| \ | |</span>
+<span class="c1">#               | |       /  \ | |  | |  | |    | || |  | |  \| |</span>
+<span class="c1">#               | |      / /\ \| |  | |  | |    | || |  | | . ` |</span>
+<span class="c1">#               | |____ / ____ \ |__| |  | |   _| || |__| | |\  |</span>
+<span class="c1">#                \_____/_/    \_\____/   |_|  |_____\____/|_| \_|</span>
+<span class="c1">#</span>
+<span class="c1">#     THIS FILE IS AUTOMATICALLY GENERATED AND MUST NOT BE EDITED MANUALLY!</span>
+<span class="c1">#</span>
+<span class="c1"># Generator:    sensirion-i2c-interface-generator 0.6.0</span>
+<span class="c1"># Product:      SEN5x</span>
+<span class="c1"># Version:      2.2.1</span>
+<span class="c1">#</span>
+<span class="c1">##############################################################################</span>
+<span class="c1">##############################################################################</span>
+
+<span class="c1"># flake8: noqa</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span><span class="p">,</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
+<span class="kn">from</span> <span class="nn">sensirion_i2c_driver</span> <span class="kn">import</span> <span class="n">SensirionI2cCommand</span><span class="p">,</span> <span class="n">CrcCalculator</span>
+<span class="kn">from</span> <span class="nn">struct</span> <span class="kn">import</span> <span class="n">pack</span><span class="p">,</span> <span class="n">unpack</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Sen5xI2cCmdBase</span><span class="p">(</span><span class="n">SensirionI2cCommand</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SEN5x I²C base command.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">tx_data</span><span class="p">,</span> <span class="n">rx_length</span><span class="p">,</span> <span class="n">read_delay</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span>
+                 <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs a new SEN5x I²C command.</span>
+
+<span class="sd">        :param int/None command:</span>
+<span class="sd">            The command ID to be sent to the device. None means that no</span>
+<span class="sd">            command will be sent, i.e. only ``tx_data`` (if not None) will</span>
+<span class="sd">            be sent. No CRC is added to these bytes since the command ID</span>
+<span class="sd">            usually already contains a CRC.</span>
+<span class="sd">        :param bytes-like/list/None tx_data:</span>
+<span class="sd">            Bytes to be extended with CRCs and then sent to the I²C device.</span>
+<span class="sd">            None means that no write header will be sent at all (if ``command``</span>
+<span class="sd">            is None too). An empty list means to send the write header (even if</span>
+<span class="sd">            ``command`` is None), but without data following it.</span>
+<span class="sd">        :param int/None rx_length:</span>
+<span class="sd">            Number of bytes to be read from the I²C device, including CRC</span>
+<span class="sd">            bytes. None means that no read header is sent at all. Zero means</span>
+<span class="sd">            to send the read header, but without reading any data.</span>
+<span class="sd">        :param float read_delay:</span>
+<span class="sd">            Delay (in Seconds) to be inserted between the end of the write</span>
+<span class="sd">            operation and the beginning of the read operation. This is needed</span>
+<span class="sd">            if the device needs some time to prepare the RX data, e.g. if it</span>
+<span class="sd">            has to perform a measurement. Set to 0.0 to indicate that no delay</span>
+<span class="sd">            is needed, i.e. the device does not need any processing time.</span>
+<span class="sd">        :param float timeout:</span>
+<span class="sd">            Timeout (in Seconds) to be used in case of clock stretching. If the</span>
+<span class="sd">            device stretches the clock longer than this value, the transceive</span>
+<span class="sd">            operation will be aborted with a timeout error. Set to 0.0 to</span>
+<span class="sd">            indicate that the device will not stretch the clock for this</span>
+<span class="sd">            command.</span>
+<span class="sd">        :param float post_processing_time:</span>
+<span class="sd">            Maximum time in seconds the device needs for post processing of</span>
+<span class="sd">            this command until it is ready to receive the next command. For</span>
+<span class="sd">            example after a device reset command, the device might need some</span>
+<span class="sd">            time until it is ready again. Usually this is 0.0s, i.e. no post</span>
+<span class="sd">            processing is needed.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="n">command</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="n">tx_data</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="n">rx_length</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="n">read_delay</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span>
+            <span class="n">crc</span><span class="o">=</span><span class="n">CrcCalculator</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mh">0x31</span><span class="p">,</span> <span class="mh">0xFF</span><span class="p">,</span> <span class="mh">0x00</span><span class="p">),</span>
+            <span class="n">command_bytes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="n">post_processing_time</span><span class="p">,</span>
+        <span class="p">)</span>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdStartMeasurement"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdStartMeasurement">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdStartMeasurement</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Start Measurement I²C Command</span>
+
+<span class="sd">    Starts a continuous measurement.</span>
+
+<span class="sd">    After starting the measurement, it takes some time (~1s) until the first</span>
+<span class="sd">    measurement results are available. You could poll with the command 0x0202</span>
+<span class="sd">    &quot;Read Data Ready&quot; to check when the results are ready to read.</span>
+
+<span class="sd">    If the device is in measure mode without PM and the firmware version is</span>
+<span class="sd">    higher than 1.0, this command enables PM measurement without affecting the</span>
+<span class="sd">    already running RH/T/VOC/NOx measurements (except that the &quot;data</span>
+<span class="sd">    ready&quot;-flag will be cleared). If the device is in idle mode, this command</span>
+<span class="sd">    starts the normal measurement. In any other case (e.g. normal measure mode</span>
+<span class="sd">    already running), this command has no effect.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdStartMeasurement.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdStartMeasurement.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdStartMeasurement</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x0021</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdStartMeasurementWithoutPm"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdStartMeasurementWithoutPm">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdStartMeasurementWithoutPm</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Start Measurement Without PM I²C Command</span>
+
+<span class="sd">    Starts a continuous measurement without PM. Only humidity, temperature, VOC</span>
+<span class="sd">    and NOx are available in this mode. Laser and fan are switched off to keep</span>
+<span class="sd">    power consumption low.</span>
+
+<span class="sd">    After starting the measurement, it takes some time (~1s) until the first</span>
+<span class="sd">    measurement results are available. You could poll with the command 0x0202</span>
+<span class="sd">    &quot;Read Data Ready&quot; to check when the results are ready to read.</span>
+
+<span class="sd">    If the device is in the normal measure mode and the firmware version is</span>
+<span class="sd">    higher than 1.0, this command disables PM measurement without affecting the</span>
+<span class="sd">    already running RH/T/VOC/NOx measurements (except that the &quot;data</span>
+<span class="sd">    ready&quot;-flag will be cleared). If the device is in idle mode, this command</span>
+<span class="sd">    starts the measurement without PM. In any other case (e.g. measure mode</span>
+<span class="sd">    without PM already running), this command has no effect.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdStartMeasurementWithoutPm.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdStartMeasurementWithoutPm.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdStartMeasurementWithoutPm</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x0037</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdStopMeasurement"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdStopMeasurement">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdStopMeasurement</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Stop Measurement I²C Command</span>
+
+<span class="sd">    Stops the measurement and returns to idle mode.</span>
+
+<span class="sd">    If the device is already in idle mode, this command has no effect.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdStopMeasurement.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdStopMeasurement.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdStopMeasurement</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x0104</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.16</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<span class="k">class</span> <span class="nc">Sen5xI2cCmdReadDataReady</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read Data Ready I²C Command</span>
+
+<span class="sd">    This command can be used to check if new measurement results are ready to</span>
+<span class="sd">    read. The data ready flag is automatically reset after reading the</span>
+<span class="sd">    measurement values with the 0x03.. &quot;Read Measured Values&quot; commands.</span>
+
+<span class="sd">    .. note:: During fan (auto-)cleaning, no measurement data is available for</span>
+<span class="sd">              several seconds and thus this flag will not be set until cleaning</span>
+<span class="sd">              has finished. So please expect gaps of several seconds at any</span>
+<span class="sd">              time if fan auto-cleaning is enabled.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdReadDataReady.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdReadDataReady.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdReadDataReady</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x0202</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates the CRCs of the received data from the device and returns</span>
+<span class="sd">        the interpreted data.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            - padding (int) -</span>
+<span class="sd">              Padding byte, always 0x00.</span>
+<span class="sd">            - data_ready (bool) -</span>
+<span class="sd">              True (0x01) if data is ready, False (0x00) if not. When no</span>
+<span class="sd">              measurement is running, False will be returned.</span>
+<span class="sd">        :rtype: tuple</span>
+<span class="sd">        :raise ~sensirion_i2c_driver.errors.I2cChecksumError:</span>
+<span class="sd">            If a received CRC was wrong.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># check and remove CRCs</span>
+        <span class="n">checked_data</span> <span class="o">=</span> <span class="n">Sen5xI2cCmdBase</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># convert raw received data into proper data types</span>
+        <span class="n">padding</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;B&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># uint8</span>
+        <span class="n">data_ready</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;?&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># bool</span>
+        <span class="k">return</span> <span class="n">padding</span><span class="p">,</span> \
+            <span class="n">data_ready</span>
+
+
+<span class="k">class</span> <span class="nc">Sen5xI2cCmdReadMeasuredValues</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read Measured Values I²C Command</span>
+
+<span class="sd">    Returns the measured values.</span>
+
+<span class="sd">    The command 0x0202 &quot;Read Data Ready&quot; can be used to check if new data is</span>
+<span class="sd">    available since the last read operation. If no new data is available, the</span>
+<span class="sd">    previous values will be returned again. If no data is available at all</span>
+<span class="sd">    (e.g. measurement not running for at least one second), all values will be</span>
+<span class="sd">    at their upper limit (0xFFFF for ``uint16``, 0x7FFF for ``int16``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdReadMeasuredValues.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdReadMeasuredValues.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdReadMeasuredValues</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x03C4</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates the CRCs of the received data from the device and returns</span>
+<span class="sd">        the interpreted data.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            - mass_concentration_pm1p0 (int) -</span>
+<span class="sd">              Value is scaled with factor 10: PM1.0 [µg/m³] = value / 10</span>
+
+<span class="sd">              *Note: If this value is unknown, 0xFFFF is returned.*</span>
+<span class="sd">            - mass_concentration_pm2p5 (int) -</span>
+<span class="sd">              Value is scaled with factor 10: PM2.5 [µg/m³] = value / 10</span>
+
+<span class="sd">              *Note: If this value is unknown, 0xFFFF is returned.*</span>
+<span class="sd">            - mass_concentration_pm4p0 (int) -</span>
+<span class="sd">              Value is scaled with factor 10: PM4.0 [µg/m³] = value / 10</span>
+
+<span class="sd">              *Note: If this value is unknown, 0xFFFF is returned.*</span>
+<span class="sd">            - mass_concentration_pm10p0 (int) -</span>
+<span class="sd">              Value is scaled with factor 10: PM10.0 [µg/m³] = value / 10</span>
+
+<span class="sd">              *Note: If this value is unknown, 0xFFFF is returned.*</span>
+<span class="sd">            - ambient_humidity (int) -</span>
+<span class="sd">              Value is scaled with factor 100: RH [%] = value / 100</span>
+
+<span class="sd">              *Note: If this value is unknown, 0x7FFF is returned.*</span>
+<span class="sd">            - ambient_temperature (int) -</span>
+<span class="sd">              Value is scaled with factor 200: T [°C] = value / 200</span>
+
+<span class="sd">              *Note: If this value is unknown, 0x7FFF is returned.*</span>
+<span class="sd">            - voc_index (int) -</span>
+<span class="sd">              Value is scaled with factor 10: VOC Index = value / 10</span>
+
+<span class="sd">              *Note: If this value is unknown, 0x7FFF is returned.*</span>
+<span class="sd">            - nox_index (int) -</span>
+<span class="sd">              Value is scaled with factor 10: NOx Index = value / 10</span>
+
+<span class="sd">              *Note: If this value is unknown, 0x7FFF is returned. During the</span>
+<span class="sd">              first 10..11 seconds after power-on or device reset, this value</span>
+<span class="sd">              will be 0x7FFF as well.*</span>
+<span class="sd">        :rtype: tuple</span>
+<span class="sd">        :raise ~sensirion_i2c_driver.errors.I2cChecksumError:</span>
+<span class="sd">            If a received CRC was wrong.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># check and remove CRCs</span>
+        <span class="n">checked_data</span> <span class="o">=</span> <span class="n">Sen5xI2cCmdBase</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># convert raw received data into proper data types</span>
+        <span class="n">mass_concentration_pm1p0</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># uint16</span>
+        <span class="n">mass_concentration_pm2p5</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># uint16</span>
+        <span class="n">mass_concentration_pm4p0</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># uint16</span>
+        <span class="n">mass_concentration_pm10p0</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># uint16</span>
+        <span class="n">ambient_humidity</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">10</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># int16</span>
+        <span class="n">ambient_temperature</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">10</span><span class="p">:</span><span class="mi">12</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># int16</span>
+        <span class="n">voc_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">12</span><span class="p">:</span><span class="mi">14</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># int16</span>
+        <span class="n">nox_index</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">14</span><span class="p">:</span><span class="mi">16</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># int16</span>
+        <span class="k">return</span> <span class="n">mass_concentration_pm1p0</span><span class="p">,</span> \
+            <span class="n">mass_concentration_pm2p5</span><span class="p">,</span> \
+            <span class="n">mass_concentration_pm4p0</span><span class="p">,</span> \
+            <span class="n">mass_concentration_pm10p0</span><span class="p">,</span> \
+            <span class="n">ambient_humidity</span><span class="p">,</span> \
+            <span class="n">ambient_temperature</span><span class="p">,</span> \
+            <span class="n">voc_index</span><span class="p">,</span> \
+            <span class="n">nox_index</span>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdStartFanCleaning"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdStartFanCleaning">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdStartFanCleaning</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Start Fan Cleaning I²C Command</span>
+
+<span class="sd">    Starts the fan cleaning manually. The &quot;data ready&quot;-flag will be cleared</span>
+<span class="sd">    immediately and during the next few seconds, no new measurement results</span>
+<span class="sd">    will be available (old values will be returned). Once the cleaning is</span>
+<span class="sd">    finished, the &quot;data ready&quot;-flag will be set and new measurement results</span>
+<span class="sd">    will be available.</span>
+
+<span class="sd">    When executing this command while cleaning is already active, the command</span>
+<span class="sd">    does nothing.</span>
+
+<span class="sd">    If you stop the measurement while fan cleaning is active, the cleaning will</span>
+<span class="sd">    be aborted immediately.</span>
+
+<span class="sd">    .. note:: This command is only available in measure mode with PM</span>
+<span class="sd">              measurement enabled, i.e. only if the fan is already running. In</span>
+<span class="sd">              any other state, this command does nothing.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdStartFanCleaning.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdStartFanCleaning.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdStartFanCleaning</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x5607</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<span class="k">class</span> <span class="nc">Sen5xI2cCmdGetTemperatureOffsetParameters</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get Temperature Offset Parameters I²C Command</span>
+
+<span class="sd">    Gets the temperature offset parameters from the device.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetTemperatureOffsetParameters</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x60B2</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates the CRCs of the received data from the device and returns</span>
+<span class="sd">        the interpreted data.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            - offset (int) -</span>
+<span class="sd">              Constant temperature offset scaled with factor 200 (T [°C] =</span>
+<span class="sd">              value / 200).</span>
+<span class="sd">            - slope (int) -</span>
+<span class="sd">              Normalized temperature offset slope scaled with factor 10000</span>
+<span class="sd">              (applied factor = value / 10000).</span>
+<span class="sd">            - time_constant (int) -</span>
+<span class="sd">              Time constant [s] how fast the slope and offset are applied.</span>
+<span class="sd">              After the specified value in seconds, 63% of the new slope and</span>
+<span class="sd">              offset are applied.</span>
+<span class="sd">        :rtype: tuple</span>
+<span class="sd">        :raise ~sensirion_i2c_driver.errors.I2cChecksumError:</span>
+<span class="sd">            If a received CRC was wrong.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># check and remove CRCs</span>
+        <span class="n">checked_data</span> <span class="o">=</span> <span class="n">Sen5xI2cCmdBase</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># convert raw received data into proper data types</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># int16</span>
+        <span class="n">slope</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># int16</span>
+        <span class="n">time_constant</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># uint16</span>
+        <span class="k">return</span> <span class="n">offset</span><span class="p">,</span> \
+            <span class="n">slope</span><span class="p">,</span> \
+            <span class="n">time_constant</span>
+
+
+<span class="k">class</span> <span class="nc">Sen5xI2cCmdSetTemperatureOffsetParameters</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set Temperature Offset Parameters I²C Command</span>
+
+<span class="sd">    Sets the temperature offset parameters for the device.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">time_constant</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+
+<span class="sd">        :param int offset:</span>
+<span class="sd">            Constant temperature offset scaled with factor 200 (T [°C] = value</span>
+<span class="sd">            / 200). The default value is 0.</span>
+<span class="sd">        :param int slope:</span>
+<span class="sd">            Normalized temperature offset slope scaled with factor 10000</span>
+<span class="sd">            (applied factor = value / 10000). The default value is 0.</span>
+<span class="sd">        :param int time_constant:</span>
+<span class="sd">            Time constant [s] how fast the new slope and offset will be</span>
+<span class="sd">            applied. After the specified value in seconds, 63% of the new slope</span>
+<span class="sd">            and offset are applied. A time constant of zero means the new</span>
+<span class="sd">            values will be applied immediately (within the next measure</span>
+<span class="sd">            interval of 1 second).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdSetTemperatureOffsetParameters</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x60B2</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">offset</span><span class="p">),</span>
+                           <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">slope</span><span class="p">),</span>
+                           <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="n">time_constant</span><span class="p">)]),</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+        <span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">Sen5xI2cCmdGetWarmStartParameter</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get Warm Start Parameter I²C Command</span>
+
+<span class="sd">    Gets the warm start parameter from the device.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetWarmStartParameter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x60C6</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates the CRCs of the received data from the device and returns</span>
+<span class="sd">        the interpreted data.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return: Warm start behavior as a value in the range from 0 (cold</span>
+<span class="sd">                 start) to 65535 (warm start).</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        :raise ~sensirion_i2c_driver.errors.I2cChecksumError:</span>
+<span class="sd">            If a received CRC was wrong.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># check and remove CRCs</span>
+        <span class="n">checked_data</span> <span class="o">=</span> <span class="n">Sen5xI2cCmdBase</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># convert raw received data into proper data types</span>
+        <span class="n">warm_start</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># uint16</span>
+        <span class="k">return</span> <span class="n">warm_start</span>
+
+
+<span class="k">class</span> <span class="nc">Sen5xI2cCmdSetWarmStartParameter</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set Warm Start Parameter I²C Command</span>
+
+<span class="sd">    Sets the warm start parameter for the device.</span>
+
+<span class="sd">    .. note:: This parameter can be changed in any state of the device (and the</span>
+<span class="sd">              getter immediately returns the new value), but it is applied only</span>
+<span class="sd">              the next time starting a measurement, i.e. when sending a &quot;Start</span>
+<span class="sd">              Measurement&quot; command! So the parameter needs to be set *before* a</span>
+<span class="sd">              warm-start measurement is started.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">warm_start</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+
+<span class="sd">        :param int warm_start:</span>
+<span class="sd">            Warm start behavior as a value in the range from 0 (cold start) to</span>
+<span class="sd">            65535 (warm start). The default value is 0.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdSetWarmStartParameter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x60C6</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="n">warm_start</span><span class="p">)]),</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+        <span class="p">)</span>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetVocAlgorithmTuningParameters"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetVocAlgorithmTuningParameters">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdGetVocAlgorithmTuningParameters</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get VOC Algorithm Tuning Parameters I²C Command</span>
+
+<span class="sd">    Gets the currently set tuning parameters of the VOC algorithm.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetVocAlgorithmTuningParameters.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetVocAlgorithmTuningParameters.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetVocAlgorithmTuningParameters</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x60D0</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetVocAlgorithmTuningParameters.interpret_response"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetVocAlgorithmTuningParameters.interpret_response">[docs]</a>    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates the CRCs of the received data from the device and returns</span>
+<span class="sd">        the interpreted data.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            - index_offset (int) -</span>
+<span class="sd">              VOC index representing typical (average) conditions.</span>
+<span class="sd">            - learning_time_offset_hours (int) -</span>
+<span class="sd">              Time constant to estimate the VOC algorithm offset from the</span>
+<span class="sd">              history in hours. Past events will be forgotten after about twice</span>
+<span class="sd">              the learning time.</span>
+<span class="sd">            - learning_time_gain_hours (int) -</span>
+<span class="sd">              Time constant to estimate the VOC algorithm gain from the history</span>
+<span class="sd">              in hours. Past events will be forgotten after about twice the</span>
+<span class="sd">              learning time.</span>
+<span class="sd">            - gating_max_duration_minutes (int) -</span>
+<span class="sd">              Maximum duration of gating in minutes (freeze of estimator during</span>
+<span class="sd">              high VOC index signal). Zero disables the gating.</span>
+<span class="sd">            - std_initial (int) -</span>
+<span class="sd">              Initial estimate for standard deviation. Lower value boosts</span>
+<span class="sd">              events during initial learning period, but may result in larger</span>
+<span class="sd">              device-to-device variations.</span>
+<span class="sd">            - gain_factor (int) -</span>
+<span class="sd">              Gain factor to amplify or to attenuate the VOC index output.</span>
+<span class="sd">        :rtype: tuple</span>
+<span class="sd">        :raise ~sensirion_i2c_driver.errors.I2cChecksumError:</span>
+<span class="sd">            If a received CRC was wrong.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># check and remove CRCs</span>
+        <span class="n">checked_data</span> <span class="o">=</span> <span class="n">Sen5xI2cCmdBase</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># convert raw received data into proper data types</span>
+        <span class="n">index_offset</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># int16</span>
+        <span class="n">learning_time_offset_hours</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># int16</span>
+        <span class="n">learning_time_gain_hours</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># int16</span>
+        <span class="n">gating_max_duration_minutes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># int16</span>
+        <span class="n">std_initial</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">10</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># int16</span>
+        <span class="n">gain_factor</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">10</span><span class="p">:</span><span class="mi">12</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># int16</span>
+        <span class="k">return</span> <span class="n">index_offset</span><span class="p">,</span> \
+            <span class="n">learning_time_offset_hours</span><span class="p">,</span> \
+            <span class="n">learning_time_gain_hours</span><span class="p">,</span> \
+            <span class="n">gating_max_duration_minutes</span><span class="p">,</span> \
+            <span class="n">std_initial</span><span class="p">,</span> \
+            <span class="n">gain_factor</span></div></div>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdSetVocAlgorithmTuningParameters"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdSetVocAlgorithmTuningParameters">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdSetVocAlgorithmTuningParameters</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set VOC Algorithm Tuning Parameters I²C Command</span>
+
+<span class="sd">    Sets the tuning parameters of the VOC algorithm.</span>
+
+<span class="sd">    .. note:: This command is available only in idle mode. In measure mode,</span>
+<span class="sd">              this command has no effect. In addition, it has no effect if at</span>
+<span class="sd">              least one parameter is outside the specified range.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdSetVocAlgorithmTuningParameters.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdSetVocAlgorithmTuningParameters.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index_offset</span><span class="p">,</span> <span class="n">learning_time_offset_hours</span><span class="p">,</span> <span class="n">learning_time_gain_hours</span><span class="p">,</span> <span class="n">gating_max_duration_minutes</span><span class="p">,</span> <span class="n">std_initial</span><span class="p">,</span> <span class="n">gain_factor</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+
+<span class="sd">        :param int index_offset:</span>
+<span class="sd">            VOC index representing typical (average) conditions. Allowed values</span>
+<span class="sd">            are in range 1..250. The default value is 100.</span>
+<span class="sd">        :param int learning_time_offset_hours:</span>
+<span class="sd">            Time constant to estimate the VOC algorithm offset from the history</span>
+<span class="sd">            in hours. Past events will be forgotten after about twice the</span>
+<span class="sd">            learning time. Allowed values are in range 1..1000. The default</span>
+<span class="sd">            value is 12 hours.</span>
+<span class="sd">        :param int learning_time_gain_hours:</span>
+<span class="sd">            Time constant to estimate the VOC algorithm gain from the history</span>
+<span class="sd">            in hours. Past events will be forgotten after about twice the</span>
+<span class="sd">            learning time. Allowed values are in range 1..1000. The default</span>
+<span class="sd">            value is 12 hours.</span>
+<span class="sd">        :param int gating_max_duration_minutes:</span>
+<span class="sd">            Maximum duration of gating in minutes (freeze of estimator during</span>
+<span class="sd">            high VOC index signal). Set to zero to disable the gating. Allowed</span>
+<span class="sd">            values are in range 0..3000. The default value is 180 minutes.</span>
+<span class="sd">        :param int std_initial:</span>
+<span class="sd">            Initial estimate for standard deviation. Lower value boosts events</span>
+<span class="sd">            during initial learning period, but may result in larger</span>
+<span class="sd">            device-to-device variations. Allowed values are in range 10..5000.</span>
+<span class="sd">            The default value is 50.</span>
+<span class="sd">        :param int gain_factor:</span>
+<span class="sd">            Gain factor to amplify or to attenuate the VOC index output.</span>
+<span class="sd">            Allowed values are in range 1..1000. The default value is 230.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdSetVocAlgorithmTuningParameters</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x60D0</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">index_offset</span><span class="p">),</span>
+                           <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">learning_time_offset_hours</span><span class="p">),</span>
+                           <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">learning_time_gain_hours</span><span class="p">),</span>
+                           <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">gating_max_duration_minutes</span><span class="p">),</span>
+                           <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">std_initial</span><span class="p">),</span>
+                           <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">gain_factor</span><span class="p">)]),</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetNoxAlgorithmTuningParameters"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetNoxAlgorithmTuningParameters">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdGetNoxAlgorithmTuningParameters</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get NOx Algorithm Tuning Parameters I²C Command</span>
+
+<span class="sd">    Gets the currently set tuning parameters of the NOx algorithm.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetNoxAlgorithmTuningParameters.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetNoxAlgorithmTuningParameters.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetNoxAlgorithmTuningParameters</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x60E1</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetNoxAlgorithmTuningParameters.interpret_response"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetNoxAlgorithmTuningParameters.interpret_response">[docs]</a>    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates the CRCs of the received data from the device and returns</span>
+<span class="sd">        the interpreted data.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            - index_offset (int) -</span>
+<span class="sd">              NOx index representing typical (average) conditions.</span>
+<span class="sd">            - learning_time_offset_hours (int) -</span>
+<span class="sd">              Time constant to estimate the NOx algorithm offset from the</span>
+<span class="sd">              history in hours. Past events will be forgotten after about twice</span>
+<span class="sd">              the learning time.</span>
+<span class="sd">            - learning_time_gain_hours (int) -</span>
+<span class="sd">              The time constant to estimate the NOx algorithm gain from the</span>
+<span class="sd">              history has no impact for NOx. This parameter is still in place</span>
+<span class="sd">              for consistency reasons with the VOC tuning parameters command.</span>
+<span class="sd">            - gating_max_duration_minutes (int) -</span>
+<span class="sd">              Maximum duration of gating in minutes (freeze of estimator during</span>
+<span class="sd">              high NOx index signal). Zero disables the gating.</span>
+<span class="sd">            - std_initial (int) -</span>
+<span class="sd">              The initial estimate for standard deviation has no impact for</span>
+<span class="sd">              NOx. This parameter is still in place for consistency reasons</span>
+<span class="sd">              with the VOC tuning parameters command.</span>
+<span class="sd">            - gain_factor (int) -</span>
+<span class="sd">              Gain factor to amplify or to attenuate the NOx index output.</span>
+<span class="sd">        :rtype: tuple</span>
+<span class="sd">        :raise ~sensirion_i2c_driver.errors.I2cChecksumError:</span>
+<span class="sd">            If a received CRC was wrong.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># check and remove CRCs</span>
+        <span class="n">checked_data</span> <span class="o">=</span> <span class="n">Sen5xI2cCmdBase</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># convert raw received data into proper data types</span>
+        <span class="n">index_offset</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># int16</span>
+        <span class="n">learning_time_offset_hours</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># int16</span>
+        <span class="n">learning_time_gain_hours</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># int16</span>
+        <span class="n">gating_max_duration_minutes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># int16</span>
+        <span class="n">std_initial</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">8</span><span class="p">:</span><span class="mi">10</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># int16</span>
+        <span class="n">gain_factor</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">10</span><span class="p">:</span><span class="mi">12</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># int16</span>
+        <span class="k">return</span> <span class="n">index_offset</span><span class="p">,</span> \
+            <span class="n">learning_time_offset_hours</span><span class="p">,</span> \
+            <span class="n">learning_time_gain_hours</span><span class="p">,</span> \
+            <span class="n">gating_max_duration_minutes</span><span class="p">,</span> \
+            <span class="n">std_initial</span><span class="p">,</span> \
+            <span class="n">gain_factor</span></div></div>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdSetNoxAlgorithmTuningParameters"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdSetNoxAlgorithmTuningParameters">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdSetNoxAlgorithmTuningParameters</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set NOx Algorithm Tuning Parameters I²C Command</span>
+
+<span class="sd">    Sets the tuning parameters of the NOx algorithm.</span>
+
+<span class="sd">    .. note:: This command is available only in idle mode. In measure mode,</span>
+<span class="sd">              this command has no effect. In addition, it has no effect if at</span>
+<span class="sd">              least one parameter is outside the specified range.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdSetNoxAlgorithmTuningParameters.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdSetNoxAlgorithmTuningParameters.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index_offset</span><span class="p">,</span> <span class="n">learning_time_offset_hours</span><span class="p">,</span> <span class="n">learning_time_gain_hours</span><span class="p">,</span> <span class="n">gating_max_duration_minutes</span><span class="p">,</span> <span class="n">std_initial</span><span class="p">,</span> <span class="n">gain_factor</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+
+<span class="sd">        :param int index_offset:</span>
+<span class="sd">            NOx index representing typical (average) conditions. Allowed values</span>
+<span class="sd">            are in range 1..250. The default value is 1.</span>
+<span class="sd">        :param int learning_time_offset_hours:</span>
+<span class="sd">            Time constant to estimate the NOx algorithm offset from the history</span>
+<span class="sd">            in hours. Past events will be forgotten after about twice the</span>
+<span class="sd">            learning time. Allowed values are in range 1..1000. The default</span>
+<span class="sd">            value is 12 hours.</span>
+<span class="sd">        :param int learning_time_gain_hours:</span>
+<span class="sd">            The time constant to estimate the NOx algorithm gain from the</span>
+<span class="sd">            history has no impact for NOx. This parameter is still in place for</span>
+<span class="sd">            consistency reasons with the VOC tuning parameters command. This</span>
+<span class="sd">            parameter must always be set to 12 hours.</span>
+<span class="sd">        :param int gating_max_duration_minutes:</span>
+<span class="sd">            Maximum duration of gating in minutes (freeze of estimator during</span>
+<span class="sd">            high NOx index signal). Set to zero to disable the gating. Allowed</span>
+<span class="sd">            values are in range 0..3000. The default value is 720 minutes.</span>
+<span class="sd">        :param int std_initial:</span>
+<span class="sd">            The initial estimate for standard deviation parameter has no impact</span>
+<span class="sd">            for NOx. This parameter is still in place for consistency reasons</span>
+<span class="sd">            with the VOC tuning parameters command. This parameter must always</span>
+<span class="sd">            be set to 50.</span>
+<span class="sd">        :param int gain_factor:</span>
+<span class="sd">            Gain factor to amplify or to attenuate the NOx index output.</span>
+<span class="sd">            Allowed values are in range 1..1000. The default value is 230.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdSetNoxAlgorithmTuningParameters</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x60E1</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">index_offset</span><span class="p">),</span>
+                           <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">learning_time_offset_hours</span><span class="p">),</span>
+                           <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">learning_time_gain_hours</span><span class="p">),</span>
+                           <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">gating_max_duration_minutes</span><span class="p">),</span>
+                           <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">std_initial</span><span class="p">),</span>
+                           <span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;h&quot;</span><span class="p">,</span> <span class="n">gain_factor</span><span class="p">)]),</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetRhtAccelerationMode"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetRhtAccelerationMode">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdGetRhtAccelerationMode</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get RH/T Acceleration Mode I²C Command</span>
+
+<span class="sd">    Gets the RH/T acceleration mode.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetRhtAccelerationMode.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetRhtAccelerationMode.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetRhtAccelerationMode</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x60F7</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetRhtAccelerationMode.interpret_response"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetRhtAccelerationMode.interpret_response">[docs]</a>    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates the CRCs of the received data from the device and returns</span>
+<span class="sd">        the interpreted data.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return: The current RH/T acceleration mode.</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        :raise ~sensirion_i2c_driver.errors.I2cChecksumError:</span>
+<span class="sd">            If a received CRC was wrong.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># check and remove CRCs</span>
+        <span class="n">checked_data</span> <span class="o">=</span> <span class="n">Sen5xI2cCmdBase</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># convert raw received data into proper data types</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># uint16</span>
+        <span class="k">return</span> <span class="n">mode</span></div></div>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdSetRhtAccelerationMode"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdSetRhtAccelerationMode">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdSetRhtAccelerationMode</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set RH/T Acceleration Mode I²C Command</span>
+
+<span class="sd">    Sets the RH/T acceleration mode.</span>
+
+<span class="sd">    .. note:: This parameter can be changed in any state of the device (and the</span>
+<span class="sd">              getter immediately returns the new value), but it is applied only</span>
+<span class="sd">              the next time starting a measurement, i.e. when sending a &quot;Start</span>
+<span class="sd">              Measurement&quot; command. So the parameter needs to be set *before* a</span>
+<span class="sd">              new measurement is started.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdSetRhtAccelerationMode.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdSetRhtAccelerationMode.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+
+<span class="sd">        :param int mode:</span>
+<span class="sd">            The new RH/T acceleration mode.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdSetRhtAccelerationMode</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x60F7</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;H&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="p">)]),</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetVocAlgorithmState"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetVocAlgorithmState">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdGetVocAlgorithmState</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get VOC Algorithm State I²C Command</span>
+
+<span class="sd">    Gets the current VOC algorithm state. This data can be used to restore the</span>
+<span class="sd">    state with the &quot;Set VOC Algorithm State&quot; command after a short power cycle</span>
+<span class="sd">    or device reset.</span>
+
+<span class="sd">    This command can be used either in measure mode or in idle mode (which will</span>
+<span class="sd">    then return the state at the time when the measurement was stopped). In</span>
+<span class="sd">    measure mode, the state can be read each measure interval to always have</span>
+<span class="sd">    the latest state available, even in case of a sudden power loss.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetVocAlgorithmState.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetVocAlgorithmState.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetVocAlgorithmState</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x6181</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetVocAlgorithmState.interpret_response"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetVocAlgorithmState.interpret_response">[docs]</a>    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates the CRCs of the received data from the device and returns</span>
+<span class="sd">        the interpreted data.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return: Current VOC algorithm state.</span>
+<span class="sd">        :rtype: bytes</span>
+<span class="sd">        :raise ~sensirion_i2c_driver.errors.I2cChecksumError:</span>
+<span class="sd">            If a received CRC was wrong.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># check and remove CRCs</span>
+        <span class="n">checked_data</span> <span class="o">=</span> <span class="n">Sen5xI2cCmdBase</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># convert raw received data into proper data types</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">checked_data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">8</span><span class="p">])</span>  <span class="c1"># bytearray&lt;8&gt;</span>
+        <span class="k">return</span> <span class="n">state</span></div></div>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdSetVocAlgorithmState"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdSetVocAlgorithmState">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdSetVocAlgorithmState</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set VOC Algorithm State I²C Command</span>
+
+<span class="sd">    Sets the VOC algorithm state previously received with the &quot;Get VOC</span>
+<span class="sd">    Algorithm State&quot; command.</span>
+
+<span class="sd">    .. note:: This command is only available in idle mode and the state will be</span>
+<span class="sd">              applied only once when starting the next measurement. Any further</span>
+<span class="sd">              measurements (i.e. when stopping and restarting the measure mode)</span>
+<span class="sd">              will reset the state to initial values. In measure mode, this</span>
+<span class="sd">              command has no effect.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdSetVocAlgorithmState.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdSetVocAlgorithmState.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+
+<span class="sd">        :param bytes state:</span>
+<span class="sd">            VOC algorithm state to restore.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdSetVocAlgorithmState</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x6181</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="nb">bytes</span><span class="p">(</span><span class="nb">bytearray</span><span class="p">(</span><span class="n">state</span><span class="p">))]),</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetFanAutoCleaningInterval"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetFanAutoCleaningInterval">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdGetFanAutoCleaningInterval</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get Fan Auto Cleaning Interval I²C Command</span>
+
+<span class="sd">    Gets the fan auto cleaning interval from the device.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetFanAutoCleaningInterval.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetFanAutoCleaningInterval.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetFanAutoCleaningInterval</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x8004</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetFanAutoCleaningInterval.interpret_response"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetFanAutoCleaningInterval.interpret_response">[docs]</a>    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates the CRCs of the received data from the device and returns</span>
+<span class="sd">        the interpreted data.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return: Fan auto cleaning interval [s]. Zero means auto cleaning is</span>
+<span class="sd">                 disabled.</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        :raise ~sensirion_i2c_driver.errors.I2cChecksumError:</span>
+<span class="sd">            If a received CRC was wrong.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># check and remove CRCs</span>
+        <span class="n">checked_data</span> <span class="o">=</span> <span class="n">Sen5xI2cCmdBase</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># convert raw received data into proper data types</span>
+        <span class="n">interval</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;I&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># uint32</span>
+        <span class="k">return</span> <span class="n">interval</span></div></div>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdSetFanAutoCleaningInterval"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdSetFanAutoCleaningInterval">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdSetFanAutoCleaningInterval</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set Fan Auto Cleaning Interval I²C Command</span>
+
+<span class="sd">    Sets the fan auto cleaning interval for the device.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdSetFanAutoCleaningInterval.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdSetFanAutoCleaningInterval.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+
+<span class="sd">        :param int interval:</span>
+<span class="sd">            Fan auto cleaning interval [s]. Set to zero to disable auto</span>
+<span class="sd">            cleaning.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdSetFanAutoCleaningInterval</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0x8004</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="sa">b</span><span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">pack</span><span class="p">(</span><span class="s2">&quot;&gt;I&quot;</span><span class="p">,</span> <span class="n">interval</span><span class="p">)]),</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetProductName"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetProductName">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdGetProductName</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get Product Name I²C Command</span>
+
+<span class="sd">    Gets the product name from the device.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetProductName.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetProductName.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetProductName</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0xD014</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetProductName.interpret_response"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetProductName.interpret_response">[docs]</a>    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates the CRCs of the received data from the device and returns</span>
+<span class="sd">        the interpreted data.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return: Null-terminated ASCII string containing the product name. Up</span>
+<span class="sd">                 to 32 characters can be read from the device.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        :raise ~sensirion_i2c_driver.errors.I2cChecksumError:</span>
+<span class="sd">            If a received CRC was wrong.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># check and remove CRCs</span>
+        <span class="n">checked_data</span> <span class="o">=</span> <span class="n">Sen5xI2cCmdBase</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># convert raw received data into proper data types</span>
+        <span class="n">product_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">checked_data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">32</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\0</span><span class="s1">&#39;</span><span class="p">))</span>  <span class="c1"># string&lt;32&gt;</span>
+        <span class="k">return</span> <span class="n">product_name</span></div></div>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetSerialNumber"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetSerialNumber">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdGetSerialNumber</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get Serial Number I²C Command</span>
+
+<span class="sd">    Gets the serial number from the device.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetSerialNumber.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetSerialNumber.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetSerialNumber</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0xD033</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="mi">48</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetSerialNumber.interpret_response"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetSerialNumber.interpret_response">[docs]</a>    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates the CRCs of the received data from the device and returns</span>
+<span class="sd">        the interpreted data.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return: Null-terminated ASCII string containing the serial number. Up</span>
+<span class="sd">                 to 32 characters can be read from the device.</span>
+<span class="sd">        :rtype: str</span>
+<span class="sd">        :raise ~sensirion_i2c_driver.errors.I2cChecksumError:</span>
+<span class="sd">            If a received CRC was wrong.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># check and remove CRCs</span>
+        <span class="n">checked_data</span> <span class="o">=</span> <span class="n">Sen5xI2cCmdBase</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># convert raw received data into proper data types</span>
+        <span class="n">serial_number</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">checked_data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">32</span><span class="p">]</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\0</span><span class="s1">&#39;</span><span class="p">))</span>  <span class="c1"># string&lt;32&gt;</span>
+        <span class="k">return</span> <span class="n">serial_number</span></div></div>
+
+
+<span class="k">class</span> <span class="nc">Sen5xI2cCmdGetVersion</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get Version I²C Command</span>
+
+<span class="sd">    Gets the version information for the hardware, firmware and communication</span>
+<span class="sd">    protocol.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetVersion.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdGetVersion.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetVersion</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0xD100</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates the CRCs of the received data from the device and returns</span>
+<span class="sd">        the interpreted data.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            - firmware_major (int) -</span>
+<span class="sd">              Firmware major version number.</span>
+<span class="sd">            - firmware_minor (int) -</span>
+<span class="sd">              Firmware minor version number.</span>
+<span class="sd">            - firmware_debug (bool) -</span>
+<span class="sd">              Firmware debug state. If the debug state is set, the firmware is</span>
+<span class="sd">              in development.</span>
+<span class="sd">            - hardware_major (int) -</span>
+<span class="sd">              Hardware major version number.</span>
+<span class="sd">            - hardware_minor (int) -</span>
+<span class="sd">              Hardware minor version number.</span>
+<span class="sd">            - protocol_major (int) -</span>
+<span class="sd">              Protocol major version number.</span>
+<span class="sd">            - protocol_minor (int) -</span>
+<span class="sd">              Protocol minor version number.</span>
+<span class="sd">            - padding (int) -</span>
+<span class="sd">              Padding byte, ignore this.</span>
+<span class="sd">        :rtype: tuple</span>
+<span class="sd">        :raise ~sensirion_i2c_driver.errors.I2cChecksumError:</span>
+<span class="sd">            If a received CRC was wrong.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># check and remove CRCs</span>
+        <span class="n">checked_data</span> <span class="o">=</span> <span class="n">Sen5xI2cCmdBase</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># convert raw received data into proper data types</span>
+        <span class="n">firmware_major</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;B&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># uint8</span>
+        <span class="n">firmware_minor</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;B&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># uint8</span>
+        <span class="n">firmware_debug</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;?&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># bool</span>
+        <span class="n">hardware_major</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;B&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># uint8</span>
+        <span class="n">hardware_minor</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;B&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">5</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># uint8</span>
+        <span class="n">protocol_major</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;B&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">6</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># uint8</span>
+        <span class="n">protocol_minor</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;B&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">7</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># uint8</span>
+        <span class="n">padding</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;B&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">7</span><span class="p">:</span><span class="mi">8</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># uint8</span>
+        <span class="k">return</span> <span class="n">firmware_major</span><span class="p">,</span> \
+            <span class="n">firmware_minor</span><span class="p">,</span> \
+            <span class="n">firmware_debug</span><span class="p">,</span> \
+            <span class="n">hardware_major</span><span class="p">,</span> \
+            <span class="n">hardware_minor</span><span class="p">,</span> \
+            <span class="n">protocol_major</span><span class="p">,</span> \
+            <span class="n">protocol_minor</span><span class="p">,</span> \
+            <span class="n">padding</span>
+
+
+<span class="k">class</span> <span class="nc">Sen5xI2cCmdReadDeviceStatus</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read Device Status I²C Command</span>
+
+<span class="sd">    Reads the current device status.</span>
+
+<span class="sd">    Use this command to get detailed information about the device status. The</span>
+<span class="sd">    device status is encoded in flags. Each device status flag represents a</span>
+<span class="sd">    single bit in a 32-bit integer value. If more than one error is present,</span>
+<span class="sd">    the device status register value is the sum of the corresponding flag</span>
+<span class="sd">    values. For details about the available flags, refer to the device status</span>
+<span class="sd">    flags documentation.</span>
+
+<span class="sd">    .. note:: The status flags of type &quot;Error&quot; are sticky, i.e. they are not</span>
+<span class="sd">              cleared automatically even if the error condition no longer</span>
+<span class="sd">              exists. So they can only be cleared manually with the command</span>
+<span class="sd">              0xD210 &quot;Read And Clear Device Status&quot; or with a device reset. All</span>
+<span class="sd">              other flags are not sticky, i.e. they are cleared automatically</span>
+<span class="sd">              if the trigger condition disappears.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdReadDeviceStatus.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdReadDeviceStatus.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdReadDeviceStatus</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0xD206</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates the CRCs of the received data from the device and returns</span>
+<span class="sd">        the interpreted data.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return: Device status (32 flags as an integer value). For details,</span>
+<span class="sd">                 please refer to the device status flags documentation.</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        :raise ~sensirion_i2c_driver.errors.I2cChecksumError:</span>
+<span class="sd">            If a received CRC was wrong.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># check and remove CRCs</span>
+        <span class="n">checked_data</span> <span class="o">=</span> <span class="n">Sen5xI2cCmdBase</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># convert raw received data into proper data types</span>
+        <span class="n">device_status</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;I&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># uint32</span>
+        <span class="k">return</span> <span class="n">device_status</span>
+
+
+<span class="k">class</span> <span class="nc">Sen5xI2cCmdReadAndClearDeviceStatus</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read And Clear Device Status I²C Command</span>
+
+<span class="sd">    Reads the current device status (like command 0xD206 &quot;Read Device Status&quot;)</span>
+<span class="sd">    and afterwards clears all flags.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdReadAndClearDeviceStatus.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdReadAndClearDeviceStatus.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdReadAndClearDeviceStatus</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0xD210</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates the CRCs of the received data from the device and returns</span>
+<span class="sd">        the interpreted data.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return: Device status (32 flags as an integer value) **before**</span>
+<span class="sd">                 clearing it. For details, please refer to the device status</span>
+<span class="sd">                 flags documentation.</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        :raise ~sensirion_i2c_driver.errors.I2cChecksumError:</span>
+<span class="sd">            If a received CRC was wrong.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># check and remove CRCs</span>
+        <span class="n">checked_data</span> <span class="o">=</span> <span class="n">Sen5xI2cCmdBase</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># convert raw received data into proper data types</span>
+        <span class="n">device_status</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">unpack</span><span class="p">(</span><span class="s2">&quot;&gt;I&quot;</span><span class="p">,</span> <span class="n">checked_data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># uint32</span>
+        <span class="k">return</span> <span class="n">device_status</span>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdDeviceReset"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdDeviceReset">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdDeviceReset</span><span class="p">(</span><span class="n">Sen5xI2cCmdBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Device Reset I²C Command</span>
+
+<span class="sd">    Executes a reset on the device. This has the same effect as a power cycle.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdDeviceReset.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.generated.Sen5xI2cCmdDeviceReset.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdDeviceReset</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">command</span><span class="o">=</span><span class="mh">0xD304</span><span class="p">,</span>
+            <span class="n">tx_data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">rx_length</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">read_delay</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+            <span class="n">post_processing_time</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022 Sensirion AG, Switzerland
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 0.1.1
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../../../0.1.0/index.html">0.1.0</a></dd>
+            <dd><a href="generated.html">0.1.1</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../../../master/index.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

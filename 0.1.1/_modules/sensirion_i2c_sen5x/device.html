@@ -1,0 +1,885 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sensirion_i2c_sen5x.device &mdash; sensirion-i2c-sen5x 0.1.1 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> sensirion-i2c-sen5x
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">sensirion-i2c-sen5x</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>sensirion_i2c_sen5x.device</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for sensirion_i2c_sen5x.device</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># (c) Copyright 2022 Sensirion AG, Switzerland</span>
+
+<span class="kn">from</span> <span class="nn">sensirion_i2c_driver</span> <span class="kn">import</span> <span class="n">I2cDevice</span>
+<span class="kn">from</span> <span class="nn">.commands</span> <span class="kn">import</span> \
+    <span class="n">Sen5xI2cCmdDeviceReset</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdGetFanAutoCleaningInterval</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdGetNoxAlgorithmTuningParameters</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdGetProductName</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdGetRhtAccelerationMode</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdGetSerialNumber</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdGetTemperatureOffsetParameters</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdGetVersion</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdGetVocAlgorithmState</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdGetVocAlgorithmTuningParameters</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdGetWarmStartParameter</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdReadAndClearDeviceStatus</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdReadDataReady</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdReadDeviceStatus</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdReadMeasuredValues</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdSetFanAutoCleaningInterval</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdSetNoxAlgorithmTuningParameters</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdSetRhtAccelerationMode</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdSetTemperatureOffsetParameters</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdSetVocAlgorithmState</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdSetVocAlgorithmTuningParameters</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdSetWarmStartParameter</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdStartFanCleaning</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdStartMeasurement</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdStartMeasurementWithoutPm</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdStopMeasurement</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Sen5xI2cDevice"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cDevice</span><span class="p">(</span><span class="n">I2cDevice</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    SEN5x I²C device.</span>
+
+<span class="sd">    This is a low-level driver which just provides all I²C commands as Python</span>
+<span class="sd">    methods. Typically, calling a method sends one I²C request to the device</span>
+<span class="sd">    and interprets its response (if any).</span>
+
+<span class="sd">    There is no caching functionality in this driver. For example if you call</span>
+<span class="sd">    :func:`get_serial_number` 100 times, it will send the command 100 times</span>
+<span class="sd">    over the I²C interface to the device. This makes the driver completely</span>
+<span class="sd">    stateless.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.__init__"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connection</span><span class="p">,</span> <span class="n">slave_address</span><span class="o">=</span><span class="mh">0x69</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructs a new SEN5x I²C device.</span>
+
+<span class="sd">        :param ~sensirion_i2c_driver.connection.I2cConnection connection:</span>
+<span class="sd">            The I²C connection to use for communication.</span>
+<span class="sd">        :param byte slave_address:</span>
+<span class="sd">            The I²C slave address, defaults to 0x69.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cDevice</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">slave_address</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.get_product_name"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.get_product_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_product_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the product name of the device.</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">            The product name as an ASCII string.</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">            string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetProductName</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.get_serial_number"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.get_serial_number">[docs]</a>    <span class="k">def</span> <span class="nf">get_serial_number</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the serial number of the device.</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">            The serial number as an ASCII string.</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">            string</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetSerialNumber</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.get_version"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.get_version">[docs]</a>    <span class="k">def</span> <span class="nf">get_version</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the version of the device firmware, hardware and communication</span>
+<span class="sd">        protocol.</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">            The device version.</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">            ~sensirion_i2c_sen5x.response_types.Sen5xVersion</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetVersion</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.read_device_status"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.read_device_status">[docs]</a>    <span class="k">def</span> <span class="nf">read_device_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clear</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Read and optionally clear the device status.</span>
+
+<span class="sd">        :param bool clear:</span>
+<span class="sd">            If ``True``, the status flags on the device get cleared after</span>
+<span class="sd">            reading them. Defaults to ``False``.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            The device status as an object containing all status flags.</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">            ~sensirion_i2c_sen5x.response_types.Sen5xDeviceStatus</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span>
+            <span class="n">Sen5xI2cCmdReadAndClearDeviceStatus</span><span class="p">()</span> <span class="k">if</span> <span class="n">clear</span>
+            <span class="k">else</span> <span class="n">Sen5xI2cCmdReadDeviceStatus</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.device_reset"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.device_reset">[docs]</a>    <span class="k">def</span> <span class="nf">device_reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Execute a device reset (reboot firmware, similar to power cycle).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdDeviceReset</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.start_measurement"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.start_measurement">[docs]</a>    <span class="k">def</span> <span class="nf">start_measurement</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Starts a continuous measurement.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            After starting the measurement, it takes some time (~1s) until the</span>
+<span class="sd">            first measurement results are available. You could poll with the</span>
+<span class="sd">            method</span>
+<span class="sd">            :py:meth:`~sensirion_i2c_sen5x.device.Sen5xI2cDevice.read_data_ready()`</span>
+<span class="sd">            to check when the results are ready to read.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            If the device is in measure mode without particulate matter</span>
+<span class="sd">            (low-power) and the firmware version is at least 2.0, this command</span>
+<span class="sd">            enables PM measurement without affecting the already running</span>
+<span class="sd">            RH/T/VOC/NOx measurements (except that the &quot;data ready&quot;-flag will</span>
+<span class="sd">            be cleared). In previous firmware versions, this command is</span>
+<span class="sd">            supported only in idle mode.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdStartMeasurement</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.start_measurement_without_pm"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.start_measurement_without_pm">[docs]</a>    <span class="k">def</span> <span class="nf">start_measurement_without_pm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Start a continuous measurement without particulate matter (low-power).</span>
+
+<span class="sd">        Only RH/T/VOC/NOx are measured in this mode, particulate matter is</span>
+<span class="sd">        disabled to reduce power consumption.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            After starting the measurement, it takes some time (~1s) until the</span>
+<span class="sd">            first measurement results are available. You could poll with the</span>
+<span class="sd">            method</span>
+<span class="sd">            :py:meth:`~sensirion_i2c_sen5x.device.Sen5xI2cDevice.read_data_ready()`</span>
+<span class="sd">            to check when the results are ready to read.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            If the device is in measure mode with particulate matter</span>
+<span class="sd">            (normal measure mode) and the firmware version is at least 2.0,</span>
+<span class="sd">            this command disables PM measurement without affecting the already</span>
+<span class="sd">            running RH/T/VOC/NOx measurements (except that the</span>
+<span class="sd">            &quot;data ready&quot;-flag will be cleared). In previous firmware versions,</span>
+<span class="sd">            this command is supported only in idle mode.</span>
+
+<span class="sd">        .. attention:: SEN50 does not support this feature.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdStartMeasurementWithoutPm</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.stop_measurement"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.stop_measurement">[docs]</a>    <span class="k">def</span> <span class="nf">stop_measurement</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Stop the running measurement.</span>
+
+<span class="sd">        Leaves the measure mode and returns to the idle mode.</span>
+
+<span class="sd">        If the device is already in idle mode, this command has no effect.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdStopMeasurement</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.read_data_ready"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.read_data_ready">[docs]</a>    <span class="k">def</span> <span class="nf">read_data_ready</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Read the data ready flag.</span>
+
+<span class="sd">        This command can be used to check if new measurement results are ready</span>
+<span class="sd">        to read. The data ready flag is automatically reset after reading the</span>
+<span class="sd">        measured values with</span>
+<span class="sd">        :py:meth:`~sensirion_i2c_sen5x.device.Sen5xI2cDevice.read_measured_values()`.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            During fan (auto-)cleaning, no measurement data is available for</span>
+<span class="sd">            several seconds and thus this flag will not be set until cleaning</span>
+<span class="sd">            has finished. So please expect gaps of several seconds at any</span>
+<span class="sd">            time if fan auto-cleaning is enabled.</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">            ``True`` if new data is ready, ``False`` if not. When no</span>
+<span class="sd">            measurement is running, ``False`` will be returned.</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">            bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdReadDataReady</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.read_measured_values"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.read_measured_values">[docs]</a>    <span class="k">def</span> <span class="nf">read_measured_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Read the measured mass concentration, RH/T and VOC/NOx values.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            The method</span>
+<span class="sd">            :py:meth:`~sensirion_i2c_sen5x.device.Sen5xI2cDevice.read_data_ready()`</span>
+<span class="sd">            can be used to check if new data is available since the last read</span>
+<span class="sd">            operation. If no new data is available, the previous values will be</span>
+<span class="sd">            returned again. If no data is available at all (no measurement</span>
+<span class="sd">            running or immediately after starting the measurement), the</span>
+<span class="sd">            returned object will not contain any measurement results (property</span>
+<span class="sd">            ``available`` of all values is ``False``).</span>
+
+<span class="sd">        .. attention::</span>
+
+<span class="sd">            The returned object always contains all measurement signals, but</span>
+<span class="sd">            it depends on the measure mode and the product which signal values</span>
+<span class="sd">            are actually available. See</span>
+<span class="sd">            :py:class:`~sensirion_i2c_sen5x.measured_values.Sen5xMeasuredValues`</span>
+<span class="sd">            for details how it handles values which are not available. In</span>
+<span class="sd">            particular, mass concentration values are not available in the</span>
+<span class="sd">            low-power measure mode, RH/T/VOC are not available with SEN50</span>
+<span class="sd">            and NOx is not available with SEN50 and SEN54. In idle mode,</span>
+<span class="sd">            no signal values will be available at all.</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">            The latest measurement results.</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">            :py:class:`~sensirion_i2c_sen5x.measured_values.Sen5xMeasuredValues`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdReadMeasuredValues</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.get_temperature_offset_parameters"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.get_temperature_offset_parameters">[docs]</a>    <span class="k">def</span> <span class="nf">get_temperature_offset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the temperature offset parameters of the device.</span>
+
+<span class="sd">        .. attention:: SEN50 does not support this feature.</span>
+
+<span class="sd">        :param bool raw:</span>
+<span class="sd">            If ``False`` (the default), physical/normalized values (offset in</span>
+<span class="sd">            °C, slope with scale factor 1, time constant in seconds) are</span>
+<span class="sd">            returned. Otherwise the raw received integer values of offset</span>
+<span class="sd">            (scaled with factor 200) and slope (scaled with factor 10000)</span>
+<span class="sd">            are returned.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            Tuple with offset (°C or ticks), slope (scale factor 1 or 10000)</span>
+<span class="sd">            and time constant [s].</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">            float/int, float/int, int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetTemperatureOffsetParameters</span><span class="p">(</span><span class="n">raw</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.set_temperature_offset_parameters"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.set_temperature_offset_parameters">[docs]</a>    <span class="k">def</span> <span class="nf">set_temperature_offset_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span>
+                                          <span class="n">time_constant_s</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the temperature offset parameters of the device.</span>
+
+<span class="sd">        This command allows to compensate temperature effects of the</span>
+<span class="sd">        design-in at customer side by applying a custom temperature offset</span>
+<span class="sd">        to the ambient temperature. The compensated ambient temperature is</span>
+<span class="sd">        calculated as follows:</span>
+
+<span class="sd">        ::</span>
+
+<span class="sd">            T_Ambient_Compensated = T_Ambient + offset + (slope * T_Ambient)</span>
+
+<span class="sd">        Where ``slope`` and ``offset`` are the values set with this command,</span>
+<span class="sd">        smoothed with the specified time constant.</span>
+
+<span class="sd">        All temperatures (``T_Ambient_Compensated``, ``T_Ambient`` and</span>
+<span class="sd">        ``offset``) in this formula are represented in °C.</span>
+
+<span class="sd">        .. note:: This configuration is volatile, i.e. it will be reverted to</span>
+<span class="sd">                  the default value after a device reset.</span>
+
+<span class="sd">        .. attention:: SEN50 does not support this feature.</span>
+
+<span class="sd">        :param float/int offset:</span>
+<span class="sd">            Constant temperature offset (°C or ticks). The default value is 0.</span>
+<span class="sd">        :param float/int slope:</span>
+<span class="sd">            Normalized temperature offset slope (scale factor 1 or 10000).</span>
+<span class="sd">            The default value is 0.</span>
+<span class="sd">        :param int time_constant:</span>
+<span class="sd">            Time constant [s] how fast the new slope and offset will be</span>
+<span class="sd">            applied. After the specified value in seconds, 63% of the new slope</span>
+<span class="sd">            and offset are applied. A time constant of zero means the new</span>
+<span class="sd">            values will be applied immediately (within the next measure</span>
+<span class="sd">            interval of 1 second).</span>
+<span class="sd">        :param bool raw:</span>
+<span class="sd">            If ``False`` (the default), physical/normalized values are</span>
+<span class="sd">            expected (offset in °C, slope with scale factor 1, time constant</span>
+<span class="sd">            in seconds). Otherwise, raw integer values are expected for</span>
+<span class="sd">            offset (scaled with factor 200) and slope (scaled with factor</span>
+<span class="sd">            10000).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdSetTemperatureOffsetParameters</span><span class="p">(</span>
+            <span class="n">offset</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">time_constant_s</span><span class="p">,</span> <span class="n">raw</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.get_warm_start_parameter"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.get_warm_start_parameter">[docs]</a>    <span class="k">def</span> <span class="nf">get_warm_start_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the warm start parameter of the device.</span>
+
+<span class="sd">        .. attention:: SEN50 does not support this feature.</span>
+
+<span class="sd">        :param bool raw:</span>
+<span class="sd">            If ``False`` (the default), a normalized value in the range from</span>
+<span class="sd">            0.0 (cold start) to 1.0 (warm start) is returned. Otherwise</span>
+<span class="sd">            the raw received integer value is returned (0..65535).</span>
+<span class="sd">        :return:</span>
+<span class="sd">            Warm start parameter value (0..1 or 0..65535).</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">            float/int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetWarmStartParameter</span><span class="p">(</span><span class="n">raw</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.set_warm_start_parameter"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.set_warm_start_parameter">[docs]</a>    <span class="k">def</span> <span class="nf">set_warm_start_parameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">warm_start</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the warm start parameter of the device.</span>
+
+<span class="sd">        The temperature compensation algorithm is optimized for a cold start</span>
+<span class="sd">        by default, i.e. it is assumed that the &quot;Start Measurement&quot; command</span>
+<span class="sd">        is called on a device not already warmed up by previous measurements.</span>
+<span class="sd">        If the measurement is started on a device already warmed up, this</span>
+<span class="sd">        parameter can be used to improve the accuracy of the ambient</span>
+<span class="sd">        temperature output.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            This parameter can be changed in any state of the device (and the</span>
+<span class="sd">            getter immediately returns the new value), but it is applied only</span>
+<span class="sd">            the next time starting a measurement, i.e. when sending a &quot;Start</span>
+<span class="sd">            Measurement&quot; command! So the parameter needs to be set *before* a</span>
+<span class="sd">            warm-start measurement is started.</span>
+
+<span class="sd">        .. note:: This configuration is volatile, i.e. it will be reverted to</span>
+<span class="sd">                  the default value after a device reset.</span>
+
+<span class="sd">        .. attention:: SEN50 does not support this feature.</span>
+
+<span class="sd">        :param float/int warm_start:</span>
+<span class="sd">            Warm start parameter value (0..1 or 0..65535).</span>
+<span class="sd">        :param bool raw:</span>
+<span class="sd">            If ``False`` (the default), a normalized value in the range from</span>
+<span class="sd">            0.0 (cold start) to 1.0 (warm start) is expected. Otherwise</span>
+<span class="sd">            a raw integer value is expected (0..65535).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdSetWarmStartParameter</span><span class="p">(</span><span class="n">warm_start</span><span class="p">,</span> <span class="n">raw</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.get_rht_acceleration_mode"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.get_rht_acceleration_mode">[docs]</a>    <span class="k">def</span> <span class="nf">get_rht_acceleration_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the RH/T acceleration mode of the device.</span>
+
+<span class="sd">        .. attention:: SEN50 does not support this feature.</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">            The current RH/T acceleration mode. See</span>
+<span class="sd">            :py:meth:`~sensirion_i2c_sen5x.device.Sen5xI2cDevice.set_rht_acceleration_mode()`</span>
+<span class="sd">            for the list of available modes.</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">            int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetRhtAccelerationMode</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.set_rht_acceleration_mode"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.set_rht_acceleration_mode">[docs]</a>    <span class="k">def</span> <span class="nf">set_rht_acceleration_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the RH/T acceleration mode of the device.</span>
+
+<span class="sd">        By default, the RH/T acceleration algorithm is optimized for a sensor</span>
+<span class="sd">        which is positioned in free air. If the sensor is integrated into</span>
+<span class="sd">        another device, the ambient RH/T output values might not be optimal</span>
+<span class="sd">        due to different thermal behavior. This parameter can be used to</span>
+<span class="sd">        adapt the RH/T acceleration behavior for the actual use-case, leading</span>
+<span class="sd">        in an improvement of the ambient RH/T output accuracy. There is a</span>
+<span class="sd">        limited set of different modes available, each identified by a number:</span>
+
+<span class="sd">        - ``0``: Default / Air Purifier / IAQ (slow)</span>
+<span class="sd">        - ``1``: IAQ (fast)</span>
+<span class="sd">        - ``2``: IAQ (medium)</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            This parameter can be changed in any state of the device (and the</span>
+<span class="sd">            getter immediately returns the new value), but it is applied only</span>
+<span class="sd">            the next time starting a measurement, i.e. when sending a &quot;Start</span>
+<span class="sd">            Measurement&quot; command. So the parameter needs to be set *before* a</span>
+<span class="sd">            new measurement is started.</span>
+
+<span class="sd">        .. note:: This configuration is volatile, i.e. it will be reverted to</span>
+<span class="sd">                  the default value after a device reset.</span>
+
+<span class="sd">        .. attention:: SEN50 does not support this feature.</span>
+
+<span class="sd">        :param int mode:</span>
+<span class="sd">            The new RH/T acceleration mode. The default is 0.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdSetRhtAccelerationMode</span><span class="p">(</span><span class="n">mode</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.get_voc_tuning_parameters"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.get_voc_tuning_parameters">[docs]</a>    <span class="k">def</span> <span class="nf">get_voc_tuning_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the currently set parameters for customizing the VOC algorithm.</span>
+
+<span class="sd">        .. attention:: SEN50 does not support this feature.</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">            - index_offset (int) -</span>
+<span class="sd">              VOC index representing typical (average) conditions.</span>
+<span class="sd">            - learning_time_offset_hours (int) -</span>
+<span class="sd">              Time constant to estimate the VOC algorithm offset from the</span>
+<span class="sd">              history in hours. Past events will be forgotten after about twice</span>
+<span class="sd">              the learning time.</span>
+<span class="sd">            - learning_time_gain_hours (int) -</span>
+<span class="sd">              Time constant to estimate the VOC algorithm gain from the history</span>
+<span class="sd">              in hours. Past events will be forgotten after about twice the</span>
+<span class="sd">              learning time.</span>
+<span class="sd">            - gating_max_duration_minutes (int) -</span>
+<span class="sd">              Maximum duration of gating in minutes (freeze of estimator during</span>
+<span class="sd">              high VOC index signal). Zero disables the gating.</span>
+<span class="sd">            - std_initial (int) -</span>
+<span class="sd">              Initial estimate for standard deviation. Lower value boosts</span>
+<span class="sd">              events during initial learning period, but may result in larger</span>
+<span class="sd">              device-to-device variations.</span>
+<span class="sd">            - gain_factor (int) -</span>
+<span class="sd">              Gain factor to amplify or to attenuate the VOC index output.</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">            tuple</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetVocAlgorithmTuningParameters</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.set_voc_tuning_parameters"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.set_voc_tuning_parameters">[docs]</a>    <span class="k">def</span> <span class="nf">set_voc_tuning_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index_offset</span><span class="p">,</span>
+                                  <span class="n">learning_time_offset_hours</span><span class="p">,</span>
+                                  <span class="n">learning_time_gain_hours</span><span class="p">,</span>
+                                  <span class="n">gating_max_duration_minutes</span><span class="p">,</span> <span class="n">std_initial</span><span class="p">,</span>
+                                  <span class="n">gain_factor</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets parameters to customize the VOC algorithm.</span>
+
+<span class="sd">        .. note:: This command is available only in idle mode. In measure mode,</span>
+<span class="sd">                  this command has no effect. In addition, it has no effect if</span>
+<span class="sd">                  at least one parameter is outside the specified range.</span>
+
+<span class="sd">        .. note:: This configuration is volatile, i.e. it will be reverted to</span>
+<span class="sd">                  the default value after a device reset.</span>
+
+<span class="sd">        .. attention:: SEN50 does not support this feature.</span>
+
+<span class="sd">        :param int index_offset:</span>
+<span class="sd">            VOC index representing typical (average) conditions. Allowed values</span>
+<span class="sd">            are in range 1..250. The default value is 100.</span>
+<span class="sd">        :param int learning_time_offset_hours:</span>
+<span class="sd">            Time constant to estimate the VOC algorithm offset from the history</span>
+<span class="sd">            in hours. Past events will be forgotten after about twice the</span>
+<span class="sd">            learning time. Allowed values are in range 1..1000. The default</span>
+<span class="sd">            value is 12 hours.</span>
+<span class="sd">        :param int learning_time_gain_hours:</span>
+<span class="sd">            Time constant to estimate the VOC algorithm gain from the history</span>
+<span class="sd">            in hours. Past events will be forgotten after about twice the</span>
+<span class="sd">            learning time. Allowed values are in range 1..1000. The default</span>
+<span class="sd">            value is 12 hours.</span>
+<span class="sd">        :param int gating_max_duration_minutes:</span>
+<span class="sd">            Maximum duration of gating in minutes (freeze of estimator during</span>
+<span class="sd">            high VOC index signal). Set to zero to disable the gating. Allowed</span>
+<span class="sd">            values are in range 0..3000. The default value is 180 minutes.</span>
+<span class="sd">        :param int std_initial:</span>
+<span class="sd">            Initial estimate for standard deviation. Lower value boosts events</span>
+<span class="sd">            during initial learning period, but may result in larger</span>
+<span class="sd">            device-to-device variations. Allowed values are in range 10..5000.</span>
+<span class="sd">            The default value is 50.</span>
+<span class="sd">        :param int gain_factor:</span>
+<span class="sd">            Gain factor to amplify or to attenuate the VOC index output.</span>
+<span class="sd">            Allowed values are in range 1..1000. The default value is 230.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdSetVocAlgorithmTuningParameters</span><span class="p">(</span>
+            <span class="n">index_offset</span><span class="p">,</span> <span class="n">learning_time_offset_hours</span><span class="p">,</span>
+            <span class="n">learning_time_gain_hours</span><span class="p">,</span> <span class="n">gating_max_duration_minutes</span><span class="p">,</span>
+            <span class="n">std_initial</span><span class="p">,</span> <span class="n">gain_factor</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.get_nox_tuning_parameters"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.get_nox_tuning_parameters">[docs]</a>    <span class="k">def</span> <span class="nf">get_nox_tuning_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the currently set parameters for customizing the NOx algorithm.</span>
+
+<span class="sd">        .. attention:: SEN50 and SEN54 do not support this feature.</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">            - index_offset (int) -</span>
+<span class="sd">              NOx index representing typical (average) conditions.</span>
+<span class="sd">            - learning_time_offset_hours (int) -</span>
+<span class="sd">              Time constant to estimate the NOx algorithm offset from the</span>
+<span class="sd">              history in hours. Past events will be forgotten after about twice</span>
+<span class="sd">              the learning time.</span>
+<span class="sd">            - learning_time_gain_hours (int) -</span>
+<span class="sd">              The time constant to estimate the NOx algorithm gain from the</span>
+<span class="sd">              history has no impact for NOx. This parameter is still in place</span>
+<span class="sd">              for consistency reasons with the VOC tuning parameters command.</span>
+<span class="sd">            - gating_max_duration_minutes (int) -</span>
+<span class="sd">              Maximum duration of gating in minutes (freeze of estimator during</span>
+<span class="sd">              high NOx index signal). Zero disables the gating.</span>
+<span class="sd">            - std_initial (int) -</span>
+<span class="sd">              The initial estimate for standard deviation has no impact for</span>
+<span class="sd">              NOx. This parameter is still in place for consistency reasons</span>
+<span class="sd">              with the VOC tuning parameters command.</span>
+<span class="sd">            - gain_factor (int) -</span>
+<span class="sd">              Gain factor to amplify or to attenuate the NOx index output.</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">            tuple</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetNoxAlgorithmTuningParameters</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.set_nox_tuning_parameters"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.set_nox_tuning_parameters">[docs]</a>    <span class="k">def</span> <span class="nf">set_nox_tuning_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index_offset</span><span class="p">,</span>
+                                  <span class="n">learning_time_offset_hours</span><span class="p">,</span>
+                                  <span class="n">learning_time_gain_hours</span><span class="p">,</span>
+                                  <span class="n">gating_max_duration_minutes</span><span class="p">,</span> <span class="n">std_initial</span><span class="p">,</span>
+                                  <span class="n">gain_factor</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Sets parameters to customize the NOx algorithm.</span>
+
+<span class="sd">        .. note:: This command is available only in idle mode. In measure mode,</span>
+<span class="sd">                  this command has no effect. In addition, it has no effect if</span>
+<span class="sd">                  at least one parameter is outside the specified range.</span>
+
+<span class="sd">        .. note:: This configuration is volatile, i.e. it will be reverted to</span>
+<span class="sd">                  the default value after a device reset.</span>
+
+<span class="sd">        .. attention:: SEN50 and SEN54 do not support this feature.</span>
+
+<span class="sd">        :param int index_offset:</span>
+<span class="sd">            NOx index representing typical (average) conditions. Allowed values</span>
+<span class="sd">            are in range 1..250. The default value is 1.</span>
+<span class="sd">        :param int learning_time_offset_hours:</span>
+<span class="sd">            Time constant to estimate the NOx algorithm offset from the history</span>
+<span class="sd">            in hours. Past events will be forgotten after about twice the</span>
+<span class="sd">            learning time. Allowed values are in range 1..1000. The default</span>
+<span class="sd">            value is 12 hours.</span>
+<span class="sd">        :param int learning_time_gain_hours:</span>
+<span class="sd">            The time constant to estimate the NOx algorithm gain from the</span>
+<span class="sd">            history has no impact for NOx. This parameter is still in place for</span>
+<span class="sd">            consistency reasons with the VOC tuning parameters command. This</span>
+<span class="sd">            parameter must always be set to 12 hours.</span>
+<span class="sd">        :param int gating_max_duration_minutes:</span>
+<span class="sd">            Maximum duration of gating in minutes (freeze of estimator during</span>
+<span class="sd">            high NOx index signal). Set to zero to disable the gating. Allowed</span>
+<span class="sd">            values are in range 0..3000. The default value is 720 minutes.</span>
+<span class="sd">        :param int std_initial:</span>
+<span class="sd">            The initial estimate for standard deviation parameter has no impact</span>
+<span class="sd">            for NOx. This parameter is still in place for consistency reasons</span>
+<span class="sd">            with the VOC tuning parameters command. This parameter must always</span>
+<span class="sd">            be set to 50.</span>
+<span class="sd">        :param int gain_factor:</span>
+<span class="sd">            Gain factor to amplify or to attenuate the NOx index output.</span>
+<span class="sd">            Allowed values are in range 1..1000. The default value is 230.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdSetNoxAlgorithmTuningParameters</span><span class="p">(</span>
+            <span class="n">index_offset</span><span class="p">,</span> <span class="n">learning_time_offset_hours</span><span class="p">,</span>
+            <span class="n">learning_time_gain_hours</span><span class="p">,</span> <span class="n">gating_max_duration_minutes</span><span class="p">,</span>
+            <span class="n">std_initial</span><span class="p">,</span> <span class="n">gain_factor</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.get_voc_state"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.get_voc_state">[docs]</a>    <span class="k">def</span> <span class="nf">get_voc_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the current VOC algorithm state.</span>
+
+<span class="sd">        The returned data can be used to restore the state with the method</span>
+<span class="sd">        :py:meth:`~sensirion_i2c_sen5x.device.Sen5xI2cDevice.set_voc_state()`</span>
+<span class="sd">        to resume operation after a short power cycle or device reset,</span>
+<span class="sd">        skipping the initial learning phase of the VOC algorithm.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            This command can be used either in measure mode or in idle mode</span>
+<span class="sd">            (which will then return the state at the time when the measurement</span>
+<span class="sd">            was stopped). In measure mode, the state can be read each measure</span>
+<span class="sd">            interval to always have the latest state available, even in case of</span>
+<span class="sd">            a sudden power loss.</span>
+
+<span class="sd">        .. note:: This feature should only be used after at least 3 hours of</span>
+<span class="sd">                  continuous operation.</span>
+
+<span class="sd">        .. attention:: SEN50 does not support this feature.</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">            Current VOC algorithm state.</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">            bytes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetVocAlgorithmState</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.set_voc_state"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.set_voc_state">[docs]</a>    <span class="k">def</span> <span class="nf">set_voc_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set/restore the VOC algorithm state.</span>
+
+<span class="sd">        By default, the VOC algorithm resets its state to inital values</span>
+<span class="sd">        each time a measurement is started, even if the measurement was stopped</span>
+<span class="sd">        only for a short time. So the VOC index output value needs a long time</span>
+<span class="sd">        until it is stable again. This can be avoided by restoring the</span>
+<span class="sd">        algorithm state previously retrieved by</span>
+<span class="sd">        :py:meth:`~sensirion_i2c_sen5x.device.Sen5xI2cDevice.get_voc_state()`</span>
+<span class="sd">        before starting the measure mode.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            This command is only available in idle mode and the state</span>
+<span class="sd">            will be applied only once when starting the next measurement. Any</span>
+<span class="sd">            further measurements (i.e. when stopping and restarting the measure</span>
+<span class="sd">            mode) will reset the state to initial values. In measure mode, this</span>
+<span class="sd">            command has no effect.</span>
+
+<span class="sd">        .. note:: This feature should not be used after interruptions of more</span>
+<span class="sd">                  than 10 minutes.</span>
+
+<span class="sd">        .. attention:: SEN50 does not support this feature.</span>
+
+<span class="sd">        :param bytes state:</span>
+<span class="sd">            VOC algorithm state to restore.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdSetVocAlgorithmState</span><span class="p">(</span><span class="n">state</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.start_fan_cleaning"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.start_fan_cleaning">[docs]</a>    <span class="k">def</span> <span class="nf">start_fan_cleaning</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Start fan cleaning.</span>
+
+<span class="sd">        Starts the fan cleaning manually by applying the maximum fan speed</span>
+<span class="sd">        for a few seconds. The &quot;data ready&quot;-flag will be cleared immediately</span>
+<span class="sd">        and during the next few seconds, no new measurement results will be</span>
+<span class="sd">        available (old values will be returned). Once the cleaning is finished,</span>
+<span class="sd">        the &quot;data ready&quot;-flag will be set and new measurement results will be</span>
+<span class="sd">        available.</span>
+
+<span class="sd">        If you stop the measurement while fan cleaning is active, the cleaning</span>
+<span class="sd">        will be aborted immediately.</span>
+
+<span class="sd">        .. note:: This command is only available in measure mode with PM</span>
+<span class="sd">                  measurement enabled, i.e. only if the fan is already running.</span>
+<span class="sd">                  In any other state, this command does nothing. In addition,</span>
+<span class="sd">                  when executing this command while cleaning is already active,</span>
+<span class="sd">                  the command does nothing.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdStartFanCleaning</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.get_fan_auto_cleaning_interval"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.get_fan_auto_cleaning_interval">[docs]</a>    <span class="k">def</span> <span class="nf">get_fan_auto_cleaning_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the fan auto cleaning interval of the device.</span>
+
+<span class="sd">        The device will automatically start the fan cleaning when the fan was</span>
+<span class="sd">        running for this number of seconds.</span>
+
+<span class="sd">        :return:</span>
+<span class="sd">            Fan auto cleaning interval [s]. Zero means auto cleaning is</span>
+<span class="sd">            disabled.</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">            int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetFanAutoCleaningInterval</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cDevice.set_fan_auto_cleaning_interval"><a class="viewcode-back" href="../../api.html#sensirion_i2c_sen5x.device.Sen5xI2cDevice.set_fan_auto_cleaning_interval">[docs]</a>    <span class="k">def</span> <span class="nf">set_fan_auto_cleaning_interval</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interval_s</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the fan auto cleaning interval of the device.</span>
+
+<span class="sd">        The device will automatically start the fan cleaning when the fan was</span>
+<span class="sd">        running for this number of seconds.</span>
+
+<span class="sd">        .. note:: This configuration is volatile, i.e. it will be reverted to</span>
+<span class="sd">                  the default value after a device reset.</span>
+
+<span class="sd">        :param int interval_s:</span>
+<span class="sd">            Fan auto cleaning interval [s]. Set to zero to disable auto</span>
+<span class="sd">            cleaning. The default value is 604800 (1 week).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">Sen5xI2cCmdSetFanAutoCleaningInterval</span><span class="p">(</span><span class="n">interval_s</span><span class="p">))</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022 Sensirion AG, Switzerland
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 0.1.1
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../../0.1.0/index.html">0.1.0</a></dd>
+            <dd><a href="device.html">0.1.1</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../../master/index.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,549 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sensirion_i2c_sen5x.commands.wrapped &mdash; sensirion-i2c-sen5x 0.1.1 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/banner.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> sensirion-i2c-sen5x
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">sensirion-i2c-sen5x</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>sensirion_i2c_sen5x.commands.wrapped</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for sensirion_i2c_sen5x.commands.wrapped</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># (c) Copyright 2022 Sensirion AG, Switzerland</span>
+
+<span class="kn">from</span> <span class="nn">.generated</span> <span class="kn">import</span> \
+    <span class="n">Sen5xI2cCmdGetTemperatureOffsetParameters</span> <span class="k">as</span> <span class="n">GetTemperatureOffsetParametersGenerated</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdGetVersion</span> <span class="k">as</span> <span class="n">GetVersionGenerated</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdGetWarmStartParameter</span> <span class="k">as</span> <span class="n">GetWarmStartParameterGenerated</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdReadAndClearDeviceStatus</span> <span class="k">as</span> <span class="n">ReadAndClearDeviceStatusGenerated</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdReadDataReady</span> <span class="k">as</span> <span class="n">ReadDataReadyGenerated</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdReadDeviceStatus</span> <span class="k">as</span> <span class="n">ReadDeviceStatusGenerated</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdReadMeasuredValues</span> <span class="k">as</span> <span class="n">ReadMeasuredValuesGenerated</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdSetTemperatureOffsetParameters</span> <span class="k">as</span> <span class="n">SetTemperatureOffsetParametersGenerated</span><span class="p">,</span> \
+    <span class="n">Sen5xI2cCmdSetWarmStartParameter</span> <span class="k">as</span> <span class="n">SetWarmStartParameterGenerated</span>
+<span class="kn">from</span> <span class="nn">..measured_values</span> <span class="kn">import</span> <span class="n">Sen5xMeasuredValues</span>
+<span class="kn">from</span> <span class="nn">..response_types</span> <span class="kn">import</span> <span class="n">Sen5xDeviceStatus</span><span class="p">,</span> <span class="n">Sen5xFirmwareVersion</span><span class="p">,</span> \
+    <span class="n">Sen5xHardwareVersion</span><span class="p">,</span> <span class="n">Sen5xProtocolVersion</span><span class="p">,</span> <span class="n">Sen5xVersion</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdReadDataReady"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.wrapped.Sen5xI2cCmdReadDataReady">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdReadDataReady</span><span class="p">(</span><span class="n">ReadDataReadyGenerated</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read Data Ready I²C Command</span>
+
+<span class="sd">    This command can be used to check if new measurement results are ready to</span>
+<span class="sd">    read. The data ready flag is automatically reset after reading the</span>
+<span class="sd">    measurement values with the 0x03.. &quot;Read Measured Values&quot; commands.</span>
+
+<span class="sd">    .. note:: During fan (auto-)cleaning, no measurement data is available for</span>
+<span class="sd">              several seconds and thus this flag will not be set until cleaning</span>
+<span class="sd">              has finished. So please expect gaps of several seconds at any</span>
+<span class="sd">              time if fan auto-cleaning is enabled.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdReadDataReady.interpret_response"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.wrapped.Sen5xI2cCmdReadDataReady.interpret_response">[docs]</a>    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates the CRCs of the received data from the device and returns</span>
+<span class="sd">        the interpreted data.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            ``True`` if data is ready, ``False`` if not.</span>
+<span class="sd">            When no measurement is running, ``False`` will be returned.</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        :raise ~sensirion_i2c_driver.errors.I2cChecksumError:</span>
+<span class="sd">            If a received CRC was wrong.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">padding</span><span class="p">,</span> <span class="n">data_ready</span> <span class="o">=</span> <span class="n">ReadDataReadyGenerated</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data_ready</span></div></div>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdReadMeasuredValues"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.wrapped.Sen5xI2cCmdReadMeasuredValues">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdReadMeasuredValues</span><span class="p">(</span><span class="n">ReadMeasuredValuesGenerated</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read Measured Values I²C Command</span>
+
+<span class="sd">    Returns the measured values.</span>
+
+<span class="sd">    The command 0x0202 &quot;Read Data Ready&quot; can be used to check if new data is</span>
+<span class="sd">    available since the last read operation. If no new data is available, the</span>
+<span class="sd">    previous values will be returned again.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdReadMeasuredValues.interpret_response"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.wrapped.Sen5xI2cCmdReadMeasuredValues.interpret_response">[docs]</a>    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates the CRCs of the received data from the device and returns</span>
+<span class="sd">        the interpreted data.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            Object containing all measured values.</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">            ~sensirion_i2c_sen5x.measured_values.Sen5xMeasuredValues</span>
+<span class="sd">        :raise ~sensirion_i2c_driver.errors.I2cChecksumError:</span>
+<span class="sd">            If a received CRC was wrong.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">ReadMeasuredValuesGenerated</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Sen5xMeasuredValues</span><span class="p">(</span><span class="n">values</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetTemperatureOffsetParameters"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.wrapped.Sen5xI2cCmdGetTemperatureOffsetParameters">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdGetTemperatureOffsetParameters</span><span class="p">(</span><span class="n">GetTemperatureOffsetParametersGenerated</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get Temperature Offset Parameters I²C Command</span>
+
+<span class="sd">    Gets the temperature offset parameters from the device.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetTemperatureOffsetParameters.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.wrapped.Sen5xI2cCmdGetTemperatureOffsetParameters.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+
+<span class="sd">        :param bool raw:</span>
+<span class="sd">            If ``False`` (the default), physical values are returned ([°C] for</span>
+<span class="sd">            offset, [1] for slope). Otherwise the raw received integer values</span>
+<span class="sd">            of offset (scaled with factor 200) and slope (scaled with factor</span>
+<span class="sd">            10000) are returned.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetTemperatureOffsetParameters</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_raw</span> <span class="o">=</span> <span class="n">raw</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetTemperatureOffsetParameters.interpret_response"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.wrapped.Sen5xI2cCmdGetTemperatureOffsetParameters.interpret_response">[docs]</a>    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates the CRCs of the received data from the device and returns</span>
+<span class="sd">        the interpreted data.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            - offset (float/int) -</span>
+<span class="sd">              Constant temperature offset.</span>
+<span class="sd">            - slope (float/int) -</span>
+<span class="sd">              Normalized temperature offset slope.</span>
+<span class="sd">            - time_constant (int) -</span>
+<span class="sd">              Time constant [s] how fast the slope and offset are applied.</span>
+<span class="sd">              After the specified value in seconds, 63% of the new slope and</span>
+<span class="sd">              offset are applied.</span>
+<span class="sd">        :rtype: tuple</span>
+<span class="sd">        :raise ~sensirion_i2c_driver.errors.I2cChecksumError:</span>
+<span class="sd">            If a received CRC was wrong.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">offset</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">time_constant</span> <span class="o">=</span> \
+            <span class="n">GetTemperatureOffsetParametersGenerated</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_raw</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">offset</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">time_constant</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">offset</span> <span class="o">/</span> <span class="mf">200.0</span><span class="p">,</span> <span class="n">slope</span> <span class="o">/</span> <span class="mf">10000.0</span><span class="p">,</span> <span class="n">time_constant</span></div></div>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdSetTemperatureOffsetParameters"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.wrapped.Sen5xI2cCmdSetTemperatureOffsetParameters">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdSetTemperatureOffsetParameters</span><span class="p">(</span><span class="n">SetTemperatureOffsetParametersGenerated</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set Temperature Offset Parameters I²C Command</span>
+
+<span class="sd">    Sets the temperature offset parameters for the device.</span>
+
+<span class="sd">    .. note:: This configuration is volatile, i.e. the parameters will be</span>
+<span class="sd">              reverted to their default value of zero after a device reset.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdSetTemperatureOffsetParameters.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.wrapped.Sen5xI2cCmdSetTemperatureOffsetParameters.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">slope</span><span class="p">,</span> <span class="n">time_constant</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+
+<span class="sd">        :param float/int offset:</span>
+<span class="sd">            Constant temperature offset. The default value is 0.</span>
+<span class="sd">        :param float/int slope:</span>
+<span class="sd">            Normalized temperature offset slope. The default value is 0.</span>
+<span class="sd">        :param int time_constant:</span>
+<span class="sd">            Time constant [s] how fast the new slope and offset will be</span>
+<span class="sd">            applied. After the specified value in seconds, 63% of the new slope</span>
+<span class="sd">            and offset are applied. A time constant of zero means the new</span>
+<span class="sd">            values will be applied immediately (within the next measure</span>
+<span class="sd">            interval of 1 second).</span>
+<span class="sd">        :param bool raw:</span>
+<span class="sd">            If ``False`` (the default), physical values are expected ([°C] for</span>
+<span class="sd">            offset, [1] for slope). Otherwise, raw integer values are expected</span>
+<span class="sd">            for offset (scaled with factor 200) and slope (scaled with factor</span>
+<span class="sd">            10000).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdSetTemperatureOffsetParameters</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">offset</span> <span class="k">if</span> <span class="n">raw</span> <span class="k">else</span> <span class="nb">round</span><span class="p">(</span><span class="n">offset</span> <span class="o">*</span> <span class="mf">200.0</span><span class="p">),</span>
+            <span class="n">slope</span> <span class="k">if</span> <span class="n">raw</span> <span class="k">else</span> <span class="nb">round</span><span class="p">(</span><span class="n">slope</span> <span class="o">*</span> <span class="mf">10000.0</span><span class="p">),</span>
+            <span class="n">time_constant</span> <span class="k">if</span> <span class="n">raw</span> <span class="k">else</span> <span class="nb">round</span><span class="p">(</span><span class="n">time_constant</span><span class="p">),</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetWarmStartParameter"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.wrapped.Sen5xI2cCmdGetWarmStartParameter">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdGetWarmStartParameter</span><span class="p">(</span><span class="n">GetWarmStartParameterGenerated</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get Warm Start Parameter I²C Command</span>
+
+<span class="sd">    Gets the warm start parameter from the device.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetWarmStartParameter.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.wrapped.Sen5xI2cCmdGetWarmStartParameter.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+
+<span class="sd">        :param bool raw:</span>
+<span class="sd">            If ``False`` (the default), a normalized value in the range from</span>
+<span class="sd">            0.0 (cold start) to 1.0 (warm start) is returned. Otherwise,</span>
+<span class="sd">            the raw received integer value is returned (0..65535).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdGetWarmStartParameter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_raw</span> <span class="o">=</span> <span class="n">raw</span></div>
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetWarmStartParameter.interpret_response"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.wrapped.Sen5xI2cCmdGetWarmStartParameter.interpret_response">[docs]</a>    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates the CRCs of the received data from the device and returns</span>
+<span class="sd">        the interpreted data.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            Warm start parameter value.</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">            float/int</span>
+<span class="sd">        :raise ~sensirion_i2c_driver.errors.I2cChecksumError:</span>
+<span class="sd">            If a received CRC was wrong.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">warm_start</span> <span class="o">=</span> <span class="n">GetWarmStartParameterGenerated</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">warm_start</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_raw</span> <span class="k">else</span> <span class="p">(</span><span class="n">warm_start</span> <span class="o">/</span> <span class="mf">65535.0</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdSetWarmStartParameter"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.wrapped.Sen5xI2cCmdSetWarmStartParameter">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdSetWarmStartParameter</span><span class="p">(</span><span class="n">SetWarmStartParameterGenerated</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Set Warm Start Parameter I²C Command</span>
+
+<span class="sd">    Sets the warm start parameter for the device.</span>
+
+<span class="sd">    .. note:: This parameter can be changed in any state of the device (and the</span>
+<span class="sd">              getter immediately returns the new value), but it is applied only</span>
+<span class="sd">              the next time starting a measurement, i.e. when sending a &quot;Start</span>
+<span class="sd">              Measurement&quot; command! So the parameter needs to be set *before* a</span>
+<span class="sd">              warm-start measurement is started.</span>
+
+<span class="sd">    .. note:: This configuration is volatile, i.e. the parameter will be</span>
+<span class="sd">              reverted to its default value of zero after a device reset.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdSetWarmStartParameter.__init__"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.wrapped.Sen5xI2cCmdSetWarmStartParameter.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">warm_start</span><span class="p">,</span> <span class="n">raw</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor.</span>
+
+<span class="sd">        :param float/int warm_start:</span>
+<span class="sd">            Warm start parameter value. The default value is 0.</span>
+<span class="sd">        :param bool raw:</span>
+<span class="sd">            If ``False`` (the default), a normalized value in the range</span>
+<span class="sd">            from 0.0 (cold start) to 1.0 (warm start) is expected. Otherwise</span>
+<span class="sd">            a raw integer value is expected (0..65535).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Sen5xI2cCmdSetWarmStartParameter</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">warm_start</span> <span class="k">if</span> <span class="n">raw</span> <span class="k">else</span> <span class="nb">round</span><span class="p">(</span><span class="n">warm_start</span> <span class="o">*</span> <span class="mf">65535.0</span><span class="p">)</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetVersion"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.wrapped.Sen5xI2cCmdGetVersion">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdGetVersion</span><span class="p">(</span><span class="n">GetVersionGenerated</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Get Version I²C Command</span>
+
+<span class="sd">    Gets the version information for the hardware, firmware and communication</span>
+<span class="sd">    protocol.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdGetVersion.interpret_response"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.wrapped.Sen5xI2cCmdGetVersion.interpret_response">[docs]</a>    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates the CRCs of the received data from the device and returns</span>
+<span class="sd">        the interpreted data.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            The device version as an object.</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">            ~sensirion_i2c_sen5x.response_types.Sen5xVersion</span>
+<span class="sd">        :raise ~sensirion_i2c_driver.errors.I2cChecksumError:</span>
+<span class="sd">            If a received CRC was wrong.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">firmware_major</span><span class="p">,</span> <span class="n">firmware_minor</span><span class="p">,</span> <span class="n">firmware_debug</span><span class="p">,</span> <span class="n">hardware_major</span><span class="p">,</span> \
+            <span class="n">hardware_minor</span><span class="p">,</span> <span class="n">protocol_major</span><span class="p">,</span> <span class="n">protocol_minor</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> \
+            <span class="n">GetVersionGenerated</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Sen5xVersion</span><span class="p">(</span>
+            <span class="n">firmware</span><span class="o">=</span><span class="n">Sen5xFirmwareVersion</span><span class="p">(</span>
+                <span class="n">major</span><span class="o">=</span><span class="n">firmware_major</span><span class="p">,</span>
+                <span class="n">minor</span><span class="o">=</span><span class="n">firmware_minor</span><span class="p">,</span>
+                <span class="n">debug</span><span class="o">=</span><span class="n">firmware_debug</span>
+            <span class="p">),</span>
+            <span class="n">hardware</span><span class="o">=</span><span class="n">Sen5xHardwareVersion</span><span class="p">(</span>
+                <span class="n">major</span><span class="o">=</span><span class="n">hardware_major</span><span class="p">,</span>
+                <span class="n">minor</span><span class="o">=</span><span class="n">hardware_minor</span>
+            <span class="p">),</span>
+            <span class="n">protocol</span><span class="o">=</span><span class="n">Sen5xProtocolVersion</span><span class="p">(</span>
+                <span class="n">major</span><span class="o">=</span><span class="n">protocol_major</span><span class="p">,</span>
+                <span class="n">minor</span><span class="o">=</span><span class="n">protocol_minor</span>
+            <span class="p">)</span>
+        <span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdReadDeviceStatus"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.wrapped.Sen5xI2cCmdReadDeviceStatus">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdReadDeviceStatus</span><span class="p">(</span><span class="n">ReadDeviceStatusGenerated</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read Device Status I²C Command</span>
+
+<span class="sd">    Reads the current device status flags.</span>
+
+<span class="sd">    .. note:: The status flags of type &quot;Error&quot; are sticky, i.e. they are not</span>
+<span class="sd">              cleared automatically even if the error condition no longer</span>
+<span class="sd">              exists. So they can only be cleared manually with the command</span>
+<span class="sd">              0xD210 &quot;Read And Clear Device Status&quot; or with a device reset. All</span>
+<span class="sd">              other flags are not sticky, i.e. they are cleared automatically</span>
+<span class="sd">              if the trigger condition disappears.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdReadDeviceStatus.interpret_response"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.wrapped.Sen5xI2cCmdReadDeviceStatus.interpret_response">[docs]</a>    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates the CRCs of the received data from the device and returns</span>
+<span class="sd">        the interpreted data.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            Device status as an object.</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">            ~sensirion_i2c_sen5x.response_types.Sen5xDeviceStatus</span>
+<span class="sd">        :raise ~sensirion_i2c_driver.errors.I2cChecksumError:</span>
+<span class="sd">            If a received CRC was wrong.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">ReadDeviceStatusGenerated</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Sen5xDeviceStatus</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="Sen5xI2cCmdReadAndClearDeviceStatus"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.wrapped.Sen5xI2cCmdReadAndClearDeviceStatus">[docs]</a><span class="k">class</span> <span class="nc">Sen5xI2cCmdReadAndClearDeviceStatus</span><span class="p">(</span><span class="n">ReadAndClearDeviceStatusGenerated</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Read And Clear Device Status I²C Command</span>
+
+<span class="sd">    Reads the current device status (like command 0xD206 &quot;Read Device Status&quot;)</span>
+<span class="sd">    and afterwards clears all flags.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Sen5xI2cCmdReadAndClearDeviceStatus.interpret_response"><a class="viewcode-back" href="../../../api.html#sensirion_i2c_sen5x.commands.wrapped.Sen5xI2cCmdReadAndClearDeviceStatus.interpret_response">[docs]</a>    <span class="k">def</span> <span class="nf">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Validates the CRCs of the received data from the device and returns</span>
+<span class="sd">        the interpreted data.</span>
+
+<span class="sd">        :param bytes data:</span>
+<span class="sd">            Received raw bytes from the read operation.</span>
+<span class="sd">        :return:</span>
+<span class="sd">            Device status as an object.</span>
+<span class="sd">        :rtype:</span>
+<span class="sd">            ~sensirion_i2c_sen5x.response_types.Sen5xDeviceStatus</span>
+<span class="sd">        :raise ~sensirion_i2c_driver.errors.I2cChecksumError:</span>
+<span class="sd">            If a received CRC was wrong.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">ReadAndClearDeviceStatusGenerated</span><span class="o">.</span><span class="n">interpret_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Sen5xDeviceStatus</span><span class="p">(</span><span class="n">value</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2022 Sensirion AG, Switzerland
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 0.1.1
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../../../0.1.0/index.html">0.1.0</a></dd>
+            <dd><a href="wrapped.html">0.1.1</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../../../master/index.html">master</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
