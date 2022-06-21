@@ -25,7 +25,7 @@ long_description = readme.strip() + "\n\n" + changelog.strip() + "\n"
 setup(
     name='sensirion-i2c-sen5x',
     version=version_string,
-    author='Urban Bruhin',
+    author='Sensirion',
     author_email='info@sensirion.com',
     description='I2C Driver for Sensirion SEN5x Sensors',
     license='BSD',
@@ -52,6 +52,8 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
         'Topic :: System :: Hardware :: Hardware Drivers'
     ]
 )
