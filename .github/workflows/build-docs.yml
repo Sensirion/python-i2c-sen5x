@@ -1,0 +1,11 @@
+name: Publish Documentation
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - "^[0-9]+.[0-9]+.[0-9]+"
+
+jobs:
+  documentation:
+      uses: sensirion/.github/.github/workflows/driver.python.documentation.yml@main

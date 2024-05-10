@@ -1,0 +1,12 @@
+name: Validate and Test Python Package
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    uses: sensirion/.github/.github/workflows/driver.python.test.yml@main
