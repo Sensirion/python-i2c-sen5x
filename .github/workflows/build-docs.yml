@@ -9,3 +9,5 @@ on:
 jobs:
   documentation:
       uses: sensirion/.github/.github/workflows/driver.python.documentation.yml@main
+      with:
+       build-python-version: 3.8
