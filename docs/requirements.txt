@@ -1,7 +1,5 @@
-sphinx~=1.8.3
-sphinx_rtd_theme~=0.4.2
-
-# Unfortunately the pip package "sphinxcontrib-versioning" is
-# broken and not maintained anymore, thus cloning it directly from
-# a forked Git repository which contains important bugfixes.
-git+https://github.com/leokoppel/sphinxcontrib-versioning.git@93fe26211de4322c0ddf347f51e095b580cdcd55
+click==8.0.4
+jinja2~=3.1.0
+sphinx~=7.1.0
+sphinx-tabs~=3.5.0
+sphinx_rtd_theme~=1.3.0

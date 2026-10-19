@@ -1,0 +1,12 @@
+name: Publish Documentation
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  documentation:
+    uses: sensirion/.github/.github/workflows/driver.python.documentation.yml@main
+    with:
+      use-project-requirements: true
