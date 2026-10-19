@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 # (c) Copyright 2022 Sensirion AG, Switzerland
 
+import logging
+
 from .response_types import Sen5xMassConcentration, Sen5xHumidity, \
     Sen5xTemperature, Sen5xAirQualityIndex
 
-import logging
 log = logging.getLogger(__name__)
 
 
@@ -126,17 +127,14 @@ class Sen5xMeasuredValues:
 
     def __iter__(self):
         keys_vals = dict(
-            mc_1p0 = self.mass_concentration_1p0.physical,
-            mc_2p5 = self.mass_concentration_2p5.physical,
-            mc_4p0 = self.mass_concentration_4p0.physical,
-            mc_10p0 = self.mass_concentration_10p0.physical,
-            ambient_rh = self.ambient_humidity.percent_rh,
-            ambient_t = self.ambient_temperature.degrees_celsius,
-            voc_index = self.voc_index.scaled,
-            nox_index = self.nox_index.scaled,
+            mc_1p0=self.mass_concentration_1p0.physical,
+            mc_2p5=self.mass_concentration_2p5.physical,
+            mc_4p0=self.mass_concentration_4p0.physical,
+            mc_10p0=self.mass_concentration_10p0.physical,
+            ambient_rh=self.ambient_humidity.percent_rh,
+            ambient_t=self.ambient_temperature.degrees_celsius,
+            voc_index=self.voc_index.scaled,
+            nox_index=self.nox_index.scaled,
         )
         for key, item in keys_vals.items():
             yield key, item
-
-
-
